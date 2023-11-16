@@ -34,5 +34,3 @@ configuration to enable type aware lint rules:
   [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and
   add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends`
   list
-
-test 3

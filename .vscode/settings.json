@@ -1,5 +1,5 @@
 {
-  // "scm.alwaysShowRepositories": false,
-  "scm.autoReveal": true
-  // "scm.alwaysShowActions": false
+  "scm.alwaysShowRepositories": false,
+  "scm.autoReveal": true,
+  "scm.alwaysShowActions": false
 }
