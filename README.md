@@ -35,4 +35,4 @@ configuration to enable type aware lint rules:
   add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends`
   list
 
-test 2
+test 3
