@@ -1,0 +1,9 @@
+{
+  "trailingComma": "es5",
+  "overrides": [
+    {
+      "files": [".prettierrc", "*.json"],
+      "options": {}
+    }
+  ]
+}
