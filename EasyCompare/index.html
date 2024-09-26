@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://www.geogebra.org/apps/deployggb.js"></script>
+    <script async src="script.js"></script>
+
+    <title>Compare Applets</title>
+    <style>
+      body {
+        display: flex;
+        flex-direction: row;
+      }
+      button {
+        margin: 20px;
+      }
+      label {
+        margin: 20px;
+      }
+      #useful-container {
+        display: flex;
+        flex-direction: column;
+        min-width: 20%;
+        word-wrap: break-word;
+      }
+      #ggb-container {
+        display: flex;
+        flex-direction: column;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="useful-container">
+      <label for="id1">Applet 1 ID: <input id="id1" type="text" /></label>
+      <label for="id2">Applet 2 ID: <input id="id2" type="text" /></label>
+      <button id="load">Load Applets</button>
+      <button id="compare">Compare Applets</button>
+      <p id="output"></p>
+    </div>
+    <div id="ggb-container">
+      <div id="ggb-element1"></div>
+      <div id="ggb-element2"></div>
+    </div>
+  </body>
+</html>
