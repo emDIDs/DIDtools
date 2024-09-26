@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DIDtools</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header>
+      <div id="header-col-1">
+        <div id="img-container">
+          <div id="img-mask"></div>
+          <img id="img" src="/gator.png" alt="Sharon, our gator mascot" />
+        </div>
+      </div>
+      <div id="header-col-2">
+        <h1>DIDtools</h1>
+        <h2>Automating the tedious to enable the fun!</h2>
+      </div>
+    </header>
+    <main>
+      <ul>
+        <li>Storybook Helper</li>
+        <ul>
+          <li>
+            <a href="StorybookHelper/index.html"> Storybook Helper - Parent </a>
+          </li>
+          <li>
+            <a href="StorybookHelper/variant.html">
+              Storybook Helper - Variant
+            </a>
+          </li>
+        </ul>
+        <li><a href="JiraTicketHelper/index.html"> Jira Ticket Helper </a></li>
+        <li><a href="EasyCompare/index.html"> Easy Compare </a></li>
+      </ul>
+    </main>
+    <p id="broken-click" class="hidden">Maybe coming soon?</p>
+    <script>
+      function clickFunction() {
+        document.querySelector("#broken-click").classList.remove("hidden");
+        setTimeout(() => {
+          document.querySelector("#broken-click").classList.add("hidden");
+          window.location.href = "https://www.youtube.com/watch?v=dQw4w9WgXcQ";
+        }, 2000);
+      }
+    </script>
+  </body>
+</html>
