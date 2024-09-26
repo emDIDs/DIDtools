@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Storybook Helper</title>
+    <link rel="stylesheet" href="styles.css" />
+    <script src="
+https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js
+"></script>
+  </head>
+  <body>
+    <div class="container">
+      <div class="input-group">
+        <label for="dbTitle">Database Title</label>
+        <input
+          type="text"
+          id="dbTitle"
+          placeholder="Enter Database Title (e.g. Super Cool Applet Title)"
+        />
+      </div>
+      <div class="input-group">
+        <label for="materialId">Material ID</label>
+        <input
+          type="text"
+          id="materialId"
+          placeholder="Enter Material ID (e.g. abcd1234)"
+        />
+      </div>
+      <div class="input-group">
+        <label for="ticketNum">Jira Ticket Number</label>
+        <input
+          type="text"
+          id="ticketNum"
+          placeholder="Enter Jira Ticket Number (e.g. 23456)"
+        />
+      </div>
+      <div class="button-group">
+        <button id="submitBtn">Submit</button>
+        <button id="otherBtn">Download</button>
+      </div>
+      <div class="output-container">
+        <div class="output-group">
+          <label for="mdxField">.mdx</label>
+          <textarea id="mdxField" readonly></textarea>
+          <button class="copy-btn" onclick="copyToClipboard('mdxField')">
+            Copy
+          </button>
+        </div>
+        <div class="output-group">
+          <label for="storyField">.stories.tsx</label>
+          <textarea id="storyField" readonly></textarea>
+          <button class="copy-btn" onclick="copyToClipboard('storyField')">
+            Copy
+          </button>
+        </div>
+        <div class="output-group">
+          <label for="pageField">page.tsx</label>
+          <textarea id="pageField" readonly></textarea>
+          <button class="copy-btn" onclick="copyToClipboard('pageField')">
+            Copy
+          </button>
+        </div>
+      </div>
+      <div class="output-container">
+        <div class="output-group">
+          <label for="pascalField">.tsx</label>
+          <textarea id="pascalField" readonly></textarea>
+          <button class="copy-btn" onclick="copyToClipboard('pascalField')">
+            Copy
+          </button>
+        </div>
+        <div class="output-group">
+          <label for="specField">.spec.tsx</label>
+          <textarea id="specField" readonly></textarea>
+          <button class="copy-btn" onclick="copyToClipboard('specField')">
+            Copy
+          </button>
+        </div>
+        <div class="output-group">
+          <label for="folderField">Folder Name</label>
+          <textarea id="folderField" readonly></textarea>
+          <button class="copy-btn" onclick="copyToClipboard('folderField')">
+            Copy
+          </button>
+        </div>
+      </div>
+      <div class="output-container">
+        <div class="output-group">
+          <label for="branchField">Branch Name</label>
+          <textarea id="branchField" readonly></textarea>
+          <button class="copy-btn" onclick="copyToClipboard('branchField')">
+            Copy
+          </button>
+        </div>
+      </div>
+    </div>
+    <script src="utils.js"></script>
+    <script src="script.js"></script>
+  </body>
+</html>
