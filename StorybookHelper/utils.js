@@ -3,7 +3,9 @@
 function makeMDX(dbTitle, isVariant = false, baseName = "") {
   const pascalTitle = pascalCase(dbTitle);
   const today = new Date();
-  const todayFormatted = `${today.getMonth() + 1}/${today.getDate()}/${today.getFullYear() % 1000}`;
+  const todayFormatted = `${today.getMonth() + 1}/${today.getDate()}/${
+    today.getFullYear() % 1000
+  }`;
   return isVariant
     ? `Modify .mdx of base applet!
 
@@ -59,7 +61,7 @@ import {
 export const ${pascalTitle}: Story = {
   args: {
     geogebraParams: {
-      material_id,
+      ...geogebraParams,
       id: '${uniqueID}',
       appletOnLoad: onLoad${pascalTitle},
       ...params${pascalTitle},
@@ -68,7 +70,7 @@ export const ${pascalTitle}: Story = {
 };`
     : `import type { Meta, StoryObj } from '@storybook/react';
 import { GeoGebra } from '@/components/sharedUI/GeoGebra/GeoGebra';
-import { material_id } from '../${pascalTitle}';
+import { geogebraParams } from '../${pascalTitle}';
 
 const meta: Meta<typeof GeoGebra> = {
   component: GeoGebra,
@@ -82,8 +84,7 @@ type Story = StoryObj<typeof GeoGebra>;
 export const Main: Story = {
   args: {
     geogebraParams: {
-      material_id,
-      id: '${uniqueID}',
+      ...geogebraParams,
     },
   },
 };
@@ -92,13 +93,18 @@ export const Main: Story = {
 
 function makePascalTSX(dbTitle, materialId, isVariant = false, baseName = "") {
   const pascalTitle = pascalCase(dbTitle);
+  const uniqueID = makeUniqueID(dbTitle, isVariant, baseName);
+  // --
   const extraImport = isVariant
     ? `
 import { GeoGebraObject } from '@/utils/ggbApplets/GgbObject';`
     : "";
   const matID = isVariant
-    ? `import { material_id } from '../${baseName}';`
-    : `export const material_id = '${materialId}';`;
+    ? `import { geogebraParams } from '../${baseName}';`
+    : `export const geogebraParams = {
+  material_id: '${materialId}',
+  id: '${uniqueID}',
+};`;
   // --
   const modifications = isVariant
     ? `
@@ -111,30 +117,30 @@ export const variantAppletOnLoad = (ggbObject: GeoGebraObject) => {
     : "";
   // --
   const passItems = isVariant
-    ? `, appletOnLoad: variantAppletOnLoad, ...extraParams`
+    ? `, id: '${uniqueID}', appletOnLoad: variantAppletOnLoad, ...extraParams`
     : "";
   // --
   const useClient = isVariant
     ? `'use client';
-  `
+`
     : "";
-  // --
-  const uniqueID = makeUniqueID(dbTitle, isVariant, baseName);
   // --
   return `${useClient}import { GeoGebra } from '@/components/sharedUI/GeoGebra/GeoGebra';${extraImport}
 
 ${matID}${modifications}
 
-export const ${pascalTitle} = () => <GeoGebra geogebraParams={{ material_id, id: '${uniqueID}'${passItems} }} />;
+export const ${pascalTitle} = () => <GeoGebra geogebraParams={{ ...geogebraParams${passItems} }} />;
 `;
 }
 
 function makeSpecTSX(dbTitle, isVariant = false, baseName = "") {
   const pascalTitle = pascalCase(dbTitle);
+  const uniqueID = makeUniqueID(dbTitle, isVariant, baseName);
+  // --
   const extraImports = isVariant
     ? `
 import { createMockGeoGebraObject } from '@/utils/ggbApplets/mockGgbObject';
-import { material_id } from '../${baseName}';`
+import { geogebraParams } from '../${baseName}';`
     : "";
   // --
   const onLoadDescribe = isVariant
@@ -152,25 +158,27 @@ import { material_id } from '../${baseName}';`
   // --
   const extraPassDescribe = isVariant
     ? `
+          id: '${uniqueID}',
           appletOnLoad: expect.any(Function),
           ...extraParams,`
     : "";
   // --
-  const uniqueID = makeUniqueID(dbTitle, isVariant, baseName);
-  // --
   return `import { render } from '@/utils/testUtils';
-import { ${pascalTitle}, ${isVariant ? `variantAppletOnLoad, extraParams` : `material_id`} } from './${pascalTitle}';${extraImports}
+import { ${pascalTitle}, ${
+    isVariant ? `variantAppletOnLoad, extraParams` : `geogebraParams`
+  } } from './${pascalTitle}';${extraImports}
 
 ${onLoadDescribe}describe('${pascalTitle}', () => {
   it('should call GeoGebra', () => {
     const mockGeoGebra =
-      require('${isVariant ? "../" : ""}../../../components/sharedUI/GeoGebra/GeoGebra').GeoGebra;
+      require('${
+        isVariant ? "../" : ""
+      }../../../components/sharedUI/GeoGebra/GeoGebra').GeoGebra;
     render(<${pascalTitle} />);
     expect(mockGeoGebra).toHaveBeenCalledWith(
       expect.objectContaining({
         geogebraParams: {
-          material_id,
-          id: '${uniqueID}',${extraPassDescribe}
+          ...geogebraParams,${extraPassDescribe}
         },
       }),
       {},
