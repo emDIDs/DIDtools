@@ -198,7 +198,7 @@ export default ${pascalTitle};
 
 function makeBranchName(dbTitle, ticketNum) {
   const hyphenTitle = hyphenate(dbTitle);
-  return `feat-digi-${ticketNum}-${hyphenTitle}`;
+  return `feat-digi-${ticketNum.replace("DIGI-", "")}-${hyphenTitle}`;
 }
 
 function makeUniqueID(dbTitle, isVariant = false, baseName) {
