@@ -41,6 +41,45 @@ function makeTable() {
   }
 }
 
+function download() {
+  // generates and downloads a .tsx file that includes exports for column headers (if checked) and rows
+
+  const myTable = document.querySelector("table");
+  console.log("myTable:", myTable);
+
+  // first, take care or headers to create columns if checkbox is checked
+  const headers = document.querySelectorAll("th");
+  if (headers.length) {
+    // grab needed info from input boxes
+    const names = [];
+    const keys = [];
+    const isRowHeader = [];
+
+    headers.forEach((header, index) => {
+      const inputString = header.children[0].value;
+      names.push(inputString);
+
+      const uniqueKey = "header".concat(index, inputString.replace(/\s/g, ""));
+      keys.push(uniqueKey);
+
+      isRowHeader.push(index === 0 ? true : false);
+    });
+
+    // create string with info
+    const arrayOfObjects = [];
+    names.forEach((name, index) => {
+      const cellString = `{ name: ${name}, key: ${keys[index]}, isRowHeader: ${isRowHeader[index]}}`;
+      arrayOfObjects.push(cellString);
+    });
+    const arrayString = arrayOfObjects.join();
+
+    const columnsString = `export const columns = [${arrayString}]`;
+    console.log("final columnsString:", columnsString);
+  }
+
+  // next, take care of regular rows to create rows
+}
+
 /**
  * export const columns = [
   { name: 'Diameter (centimeters)', key: 'diameter', isRowHeader: true },
