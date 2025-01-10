@@ -16,7 +16,7 @@ function makeTable() {
 
   const numRows = document.getElementById("numRows").value;
   const numCols = document.getElementById("numCols").value;
-  const hasColHeaders = document.getElementById("colHeaders").checked;
+  // const hasColHeaders = document.getElementById("colHeaders").checked;
 
   for (let r = 0; r < numRows; r++) {
     // Inserting a new row
@@ -26,7 +26,9 @@ function makeTable() {
       // Inserting a new cell at index c in the current row
 
       // If table headers, add them. Else, create regular cell
-      if (hasColHeaders && r === 0) {
+      // Commented line below bc we are assuming always want column headers right now - will update later when option for row headers (and both) is added
+      // if (hasColHeaders && r === 0) {
+      if (r === 0) {
         const colHeader = document.createElement("th");
         colHeader.setAttribute("class", "tableHeader");
         const inputBox = document.createElement("input");
@@ -44,36 +46,36 @@ function makeTable() {
 }
 
 function download() {
-  // generates and downloads a .tsx file that includes exports for column headers (if checked) and rows
+  // generates and downloads a .tsx file that includes exports for column headers and rows
 
   const myTable = document.querySelector("table");
   console.log("myTable:", myTable);
   const numRows = document.getElementById("numRows").value;
   const numCols = document.getElementById("numCols").value;
-  const hasColHeaders = document.getElementById("colHeaders").checked;
 
-  // first, take care or headers to create columns if checkbox is checked
+  // first, take care of column headers
   const headers = document.querySelectorAll("th");
   if (headers.length) {
     // grab needed info from input boxes
     const names = [];
-    const keys = [];
-    const isRowHeader = [];
+    // const keys = [];
+    // const isRowHeader = [];
 
     headers.forEach((header, index) => {
       const inputString = header.children[0].value;
       names.push(inputString);
 
-      const uniqueKey = "header".concat(index, inputString.replace(/\s/g, ""));
-      keys.push(uniqueKey);
+      // const uniqueKey = "header".concat(index, inputString.replace(/\s/g, ""));
+      // keys.push(uniqueKey);
 
-      isRowHeader.push(index === 0 ? true : false);
+      // isRowHeader.push(index === 0 ? true : false);
     });
 
     // create string with info
     const arrayOfHeaderObjects = [];
     names.forEach((name, index) => {
-      const cellString = `{ name: ${name}, key: ${keys[index]}, isRowHeader: ${isRowHeader[index]}}`;
+      // const cellString = `{ name: ${name}, key: ${keys[index]}, isRowHeader: ${isRowHeader[index]}}`;
+      const cellString = `{ name: ${name}}`;
       arrayOfHeaderObjects.push(cellString);
     });
     const arrayString = arrayOfHeaderObjects.join();
@@ -94,7 +96,7 @@ function download() {
 
   const arrayOfRowArrays = [];
 
-  const adjustedNumRows = hasColHeaders ? numRows - 1 : numRows;
+  const adjustedNumRows = numRows - 1;
   let cellIndex = 0;
 
   for (let i = 0; i < adjustedNumRows; i++) {
