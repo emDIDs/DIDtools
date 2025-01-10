@@ -6,6 +6,7 @@
  * 3. Column header checkbox
  * 4. Return .tsx file (pascal case name of applet + data.tsx)
  * 5. Add multiple inputs (or checkboxes) per input
+ * 6. Eventually, add an option for two languages
  *
  *
  */
@@ -27,6 +28,7 @@ function makeTable() {
       // If table headers, add them. Else, create regular cell
       if (hasColHeaders && r === 0) {
         const colHeader = document.createElement("th");
+        colHeader.setAttribute("class", "tableHeader");
         const inputBox = document.createElement("input");
         inputBox.id = `row${r}Col${c}`;
         colHeader.appendChild(inputBox);
@@ -46,6 +48,9 @@ function download() {
 
   const myTable = document.querySelector("table");
   console.log("myTable:", myTable);
+  const numRows = document.getElementById("numRows").value;
+  const numCols = document.getElementById("numCols").value;
+  const hasColHeaders = document.getElementById("colHeaders").checked;
 
   // first, take care or headers to create columns if checkbox is checked
   const headers = document.querySelectorAll("th");
@@ -66,18 +71,43 @@ function download() {
     });
 
     // create string with info
-    const arrayOfObjects = [];
+    const arrayOfHeaderObjects = [];
     names.forEach((name, index) => {
       const cellString = `{ name: ${name}, key: ${keys[index]}, isRowHeader: ${isRowHeader[index]}}`;
-      arrayOfObjects.push(cellString);
+      arrayOfHeaderObjects.push(cellString);
     });
-    const arrayString = arrayOfObjects.join();
+    const arrayString = arrayOfHeaderObjects.join();
 
     const columnsString = `export const columns = [${arrayString}]`;
     console.log("final columnsString:", columnsString);
   }
 
   // next, take care of regular rows to create rows
+  // note: cells does not contain header row cells
+  const cells = document.querySelectorAll("td");
+
+  const cellValues = [];
+
+  cells.forEach((cell) => {
+    cellValues.push(cell.childNodes[0].value);
+  });
+
+  const arrayOfRowArrays = [];
+
+  const adjustedNumRows = hasColHeaders ? numRows - 1 : numRows;
+  let cellIndex = 0;
+
+  for (let i = 0; i < adjustedNumRows; i++) {
+    const tempRow = [];
+    for (let j = 0; j < numCols; j++) {
+      tempRow.push(`{value: ${cellValues[cellIndex]}}`);
+      cellIndex++;
+    }
+    arrayOfRowArrays.push(`[${tempRow}]`);
+  }
+
+  const rowString = `export const rows = [${arrayOfRowArrays}]`;
+  console.log("rowString:", rowString);
 }
 
 /**
