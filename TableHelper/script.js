@@ -14,9 +14,20 @@
 function makeTable() {
   console.log("button clicked!");
 
+  // delete old table if shown
+  const myTable = document.getElementById("myTable");
+  if (myTable.hasChildNodes()) {
+    while (myTable.hasChildNodes()) {
+      myTable.removeChild(myTable.firstChild);
+    }
+  }
+
   const numRows = document.getElementById("numRows").value;
   const numCols = document.getElementById("numCols").value;
+  const downloadButton = document.getElementById("downloadButton");
   // const hasColHeaders = document.getElementById("colHeaders").checked;
+
+  downloadButton.removeAttribute("hidden");
 
   for (let r = 0; r < numRows; r++) {
     // Inserting a new row
