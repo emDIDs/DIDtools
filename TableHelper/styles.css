@@ -91,7 +91,12 @@ table {
     margin: 10px;
 }
 
-th,
+th {
+    border: 1px black solid;
+    padding: 5px;
+    background: #f26a35
+}
+
 td {
     border: 1px black solid;
     padding: 5px;
@@ -138,12 +143,18 @@ button:focus {
     color: white;
 }
 label {
-    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
 }
 input {
     min-height: 32px;
     margin-top: 10px;
 }
+
+input[type="checkbox"] {
+    margin-top: 3px; /* Optional: slight vertical nudge for perfect alignment */
+  }
 
 div.settings {
     display:grid;

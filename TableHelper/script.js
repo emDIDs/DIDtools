@@ -7,6 +7,7 @@
  * 4. Return .tsx file (pascal case name of applet + data.tsx)
  * 5. Add multiple inputs (or checkboxes) per input
  * 6. Eventually, add an option for two languages
+ * 7. FIX: Fix so that if value input is empty, it returns an empty string in object
  *
  *
  */
@@ -45,14 +46,37 @@ function makeTable() {
         const inputBox = document.createElement("input");
         inputBox.id = `row${r}Col${c}`;
         colHeader.appendChild(inputBox);
+        createEditableCheckbox(colHeader, c, r);
         x.appendChild(colHeader);
       } else {
         const y = x.insertCell(c);
         const inputBox = document.createElement("input");
         inputBox.id = `row${r}Col${c}`;
         y.appendChild(inputBox);
+        createEditableCheckbox(y, c, r);
       }
     }
+  }
+
+  function createEditableCheckbox(el, rowNum, colNum) {
+    // create div
+    const newDiv = document.createElement("div");
+
+    // create checkbox
+    const newCheckbox = document.createElement("input");
+    const tempID = `editableRow${rowNum}Col${colNum}`;
+    newCheckbox.id = tempID;
+    newCheckbox.setAttribute("type", "checkbox");
+
+    // create label
+    const newLabel = document.createElement("label");
+    newLabel.textContent = `Editable? `;
+    newLabel.setAttribute("for", tempID);
+
+    newLabel.appendChild(newCheckbox);
+
+    el.appendChild(newDiv);
+    newDiv.appendChild(newLabel);
   }
 }
 
@@ -74,7 +98,7 @@ function download() {
 
     headers.forEach((header, index) => {
       const inputString = header.children[0].value;
-      names.push(inputString);
+      names.push(inputString === "" ? "''" : inputString);
 
       // const uniqueKey = "header".concat(index, inputString.replace(/\s/g, ""));
       // keys.push(uniqueKey);
@@ -98,11 +122,14 @@ function download() {
   // next, take care of regular rows to create rows
   // note: cells does not contain header row cells
   const cells = document.querySelectorAll("td");
+  console.log("cells:", cells);
 
   const cellValues = [];
+  const editableBooleans = [];
 
   cells.forEach((cell) => {
-    cellValues.push(cell.childNodes[0].value);
+    const tempCellString = cell.childNodes[0].value;
+    cellValues.push(tempCellString === "" ? "''" : tempCellString);
   });
 
   const arrayOfRowArrays = [];
@@ -125,16 +152,14 @@ function download() {
 
 /**
  * export const columns = [
-  { name: 'Diameter (centimeters)', key: 'diameter', isRowHeader: true },
+  { name: 'Diameter (centimeters)', editable: true },
   {
     name: 'Distance Around the Circle (centimeters)',
-    key: 'circumference',
-    isRowHeader: false,
+    editable: true
   },
   {
     name: 'Value of the Ratio of the Distance Around the Circle to the Diameter',
-    key: 'ratio',
-    isRowHeader: false,
+    editable: true
   },
 ];
 
