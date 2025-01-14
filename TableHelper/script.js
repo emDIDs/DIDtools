@@ -45,6 +45,7 @@ function makeTable() {
         inputBox.id = `row${r}Col${c}Input`;
         colHeader.appendChild(inputBox);
         createEditableCheckbox(colHeader, c, r);
+        createErrorMessageInput(colHeader, c, r);
         x.appendChild(colHeader);
       } else {
         const y = x.insertCell(c);
@@ -52,6 +53,7 @@ function makeTable() {
         inputBox.id = `row${r}Col${c}Input`;
         y.appendChild(inputBox);
         createEditableCheckbox(y, c, r);
+        createErrorMessageInput(y, c, r);
       }
     }
   }
@@ -75,6 +77,50 @@ function makeTable() {
 
     el.appendChild(newDiv);
     newDiv.appendChild(newLabel);
+  }
+
+  const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+
+  checkboxes.forEach((checkbox) => {
+    checkbox.addEventListener("change", function () {
+      const targetDiv = document.getElementById(
+        `${checkbox.id.concat("ErrorMessage")}`
+      );
+      if (checkbox.checked) {
+        console.log(`Checkbox ${this.id} is checked`);
+        // Show error message string input box
+        targetDiv.style.visibility = "visible";
+      } else {
+        console.log(`Checkbox ${this.id} is unchecked`);
+        // Hide error message string input box
+        targetDiv.style.visibility = "hidden";
+      }
+    });
+  });
+
+  function createErrorMessageInput(el, colNum, rowNum) {
+    // creates error message input with label
+    // create div
+    const newDiv = document.createElement("div");
+    const tempDivID = `row${rowNum}Col${colNum}EditableErrorMessage`;
+    newDiv.id = tempDivID;
+
+    // create input
+    const newErrowMessageInput = document.createElement("input");
+    const tempID = `row${rowNum}Col${colNum}ErrorMessageInput`;
+    newErrowMessageInput.id = tempID;
+    // newErrowMessageInput.setAttribute("type", "checkbox");
+
+    // create label
+    const newLabel = document.createElement("label");
+    newLabel.textContent = `Error Message: `;
+    newLabel.setAttribute("for", tempID);
+
+    newLabel.appendChild(newErrowMessageInput);
+
+    el.appendChild(newDiv);
+    newDiv.appendChild(newLabel);
+    newDiv.style.visibility = "hidden";
   }
 }
 
