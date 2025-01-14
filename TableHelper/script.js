@@ -43,28 +43,29 @@ function makeTable() {
       if (r === 0) {
         const colHeader = document.createElement("th");
         colHeader.setAttribute("class", "tableHeader");
+        colHeader.setAttribute("id", `row${r}Col${c}`);
         const inputBox = document.createElement("input");
-        inputBox.id = `row${r}Col${c}`;
+        inputBox.id = `row${r}Col${c}Input`;
         colHeader.appendChild(inputBox);
         createEditableCheckbox(colHeader, c, r);
         x.appendChild(colHeader);
       } else {
         const y = x.insertCell(c);
         const inputBox = document.createElement("input");
-        inputBox.id = `row${r}Col${c}`;
+        inputBox.id = `row${r}Col${c}Input`;
         y.appendChild(inputBox);
         createEditableCheckbox(y, c, r);
       }
     }
   }
 
-  function createEditableCheckbox(el, rowNum, colNum) {
+  function createEditableCheckbox(el, colNum, rowNum) {
     // create div
     const newDiv = document.createElement("div");
 
     // create checkbox
     const newCheckbox = document.createElement("input");
-    const tempID = `editableRow${rowNum}Col${colNum}`;
+    const tempID = `row${rowNum}Col${colNum}Editable`;
     newCheckbox.id = tempID;
     newCheckbox.setAttribute("type", "checkbox");
 
@@ -90,15 +91,22 @@ function download() {
 
   // first, take care of column headers
   const headers = document.querySelectorAll("th");
+  console.log("headers:", headers);
   if (headers.length) {
     // grab needed info from input boxes
     const names = [];
+    const editableBooleansHeaders = [];
     // const keys = [];
     // const isRowHeader = [];
 
     headers.forEach((header, index) => {
       const inputString = header.children[0].value;
       names.push(inputString === "" ? "''" : inputString);
+
+      const tempEditableBool = document.getElementById(
+        `row0Col${index}Editable`
+      ).checked;
+      editableBooleansHeaders.push(tempEditableBool);
 
       // const uniqueKey = "header".concat(index, inputString.replace(/\s/g, ""));
       // keys.push(uniqueKey);
@@ -110,7 +118,7 @@ function download() {
     const arrayOfHeaderObjects = [];
     names.forEach((name, index) => {
       // const cellString = `{ name: ${name}, key: ${keys[index]}, isRowHeader: ${isRowHeader[index]}}`;
-      const cellString = `{ name: ${name}}`;
+      const cellString = `{ name: ${name}, editable: ${editableBooleansHeaders[index]}}`;
       arrayOfHeaderObjects.push(cellString);
     });
     const arrayString = arrayOfHeaderObjects.join();
