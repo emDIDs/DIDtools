@@ -3,18 +3,15 @@
  *
  * 1. Num rows
  * 2. Num cols
- * 3. Column header checkbox
+ * 3. Column header checkbox - not right now
  * 4. Return .tsx file (pascal case name of applet + data.tsx)
  * 5. Add multiple inputs (or checkboxes) per input
  * 6. Eventually, add an option for two languages
- * 7. FIX: Fix so that if value input is empty, it returns an empty string in object
  *
  *
  */
 
 function makeTable() {
-  console.log("button clicked!");
-
   // delete old table if shown
   const myTable = document.getElementById("myTable");
   if (myTable.hasChildNodes()) {
@@ -85,13 +82,11 @@ function download() {
   // generates and downloads a .tsx file that includes exports for column headers and rows
 
   const myTable = document.querySelector("table");
-  console.log("myTable:", myTable);
   const numRows = document.getElementById("numRows").value;
   const numCols = document.getElementById("numCols").value;
 
   // first, take care of column headers
   const headers = document.querySelectorAll("th");
-  console.log("headers:", headers);
   if (headers.length) {
     // grab needed info from input boxes
     const names = [];
@@ -130,10 +125,9 @@ function download() {
   // next, take care of regular rows to create rows
   // note: cells does not contain header row cells
   const cells = document.querySelectorAll("td");
-  console.log("cells:", cells);
 
   const cellValues = [];
-  const editableBooleans = [];
+  const editableBooleansCells = [];
 
   cells.forEach((cell) => {
     const tempCellString = cell.childNodes[0].value;
@@ -148,7 +142,12 @@ function download() {
   for (let i = 0; i < adjustedNumRows; i++) {
     const tempRow = [];
     for (let j = 0; j < numCols; j++) {
-      tempRow.push(`{value: ${cellValues[cellIndex]}}`);
+      const tempEditableBool = document.getElementById(
+        `row${i + 1}Col${j}Editable`
+      ).checked;
+      tempRow.push(
+        `{value: ${cellValues[cellIndex]}, editable: ${tempEditableBool}}`
+      );
       cellIndex++;
     }
     arrayOfRowArrays.push(`[${tempRow}]`);
