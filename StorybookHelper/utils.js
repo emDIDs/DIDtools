@@ -201,6 +201,11 @@ function makeBranchName(dbTitle, ticketNum) {
   return `feat-digi-${ticketNum.replace("DIGI-", "")}-${hyphenTitle}`;
 }
 
+function makePRTitle(dbTitle, ticketNum) {
+  const hyphenTitle = hyphenate(dbTitle);
+  return `feat: [digi-${ticketNum.replace("DIGI-", "")}] ${hyphenTitle}`;
+}
+
 function makeUniqueID(dbTitle, isVariant = false, baseName) {
   const baseSpaced = baseName.replace(/([A-Z]|[0-9]+)/g, " $&").trim();
   return hyphenate(isVariant ? `${baseSpaced} ${dbTitle}` : `${dbTitle} main`);
