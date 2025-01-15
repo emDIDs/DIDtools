@@ -17,6 +17,10 @@ document.getElementById("submitBtn").addEventListener("click", function () {
     dbTitle,
     ticketNum
   );
+  document.getElementById("pullRequestField").value = makePRTitle(
+    dbTitle,
+    ticketNum
+  );
   // Update labels
   document.querySelector('label[for="mdxField"]').textContent =
     `Story/${pascalTitle}.mdx`;
