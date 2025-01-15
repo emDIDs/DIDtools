@@ -141,8 +141,12 @@ function download() {
     // const isRowHeader = [];
 
     headers.forEach((header, index) => {
-      const inputString = header.children[0].value;
-      names.push(inputString === "" ? "''" : inputString);
+      const tempHeaderCellValue = document.getElementById(
+        `row0Col${index}Input`
+      ).value;
+
+      // const inputString = header.children[0].value;
+      names.push(tempHeaderCellValue === "" ? "''" : tempHeaderCellValue);
 
       const tempEditableBool = document.getElementById(
         `row0Col${index}Editable`
@@ -170,31 +174,32 @@ function download() {
 
   // next, take care of regular rows to create rows
   // note: cells does not contain header row cells
-  const cells = document.querySelectorAll("td");
 
-  const cellValues = [];
-  const editableBooleansCells = [];
-
-  cells.forEach((cell) => {
-    const tempCellString = cell.childNodes[0].value;
-    cellValues.push(tempCellString === "" ? "''" : tempCellString);
-  });
-
+  const arrayOfHeaderObjects = [];
   const arrayOfRowArrays = [];
 
   const adjustedNumRows = numRows - 1;
-  let cellIndex = 0;
 
   for (let i = 0; i < adjustedNumRows; i++) {
     const tempRow = [];
     for (let j = 0; j < numCols; j++) {
+      const tempCellValue = document.getElementById(
+        `row${i + 1}Col${j}Input`
+      ).value;
       const tempEditableBool = document.getElementById(
         `row${i + 1}Col${j}Editable`
       ).checked;
+      const tempErrorMessage = document.getElementById(
+        `row${i + 1}Col${j}ErrorMessageInput`
+      ).value;
+
+      const cleanedUpErrorMessage =
+        tempErrorMessage === "" ? `''` : `'${tempErrorMessage}'`;
       tempRow.push(
-        `{value: ${cellValues[cellIndex]}, editable: ${tempEditableBool}}`
+        `{value: ${
+          tempCellValue === "" ? "''" : tempCellValue
+        }, editable: ${tempEditableBool}, errorText: ${cleanedUpErrorMessage}}`
       );
-      cellIndex++;
     }
     arrayOfRowArrays.push(`[${tempRow}]`);
   }
