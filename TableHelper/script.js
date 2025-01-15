@@ -127,9 +127,17 @@ function makeTable() {
 function download() {
   // generates and downloads a .tsx file that includes exports for column headers and rows
 
-  const myTable = document.querySelector("table");
+  const appletName = document.getElementById("appletName").value;
   const numRows = document.getElementById("numRows").value;
   const numCols = document.getElementById("numCols").value;
+
+  // Covert appletName to pascal case
+  const pascalAppletName = appletName
+    .toLowerCase()
+    .split(" ")
+    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+    .join("");
+  console.log("pascalAppletName", pascalAppletName);
 
   // Loop through all cells to grab info - this assumes first row is always a header row
 
@@ -149,12 +157,13 @@ function download() {
         `row${i}Col${j}ErrorMessageInput`
       ).value;
 
+      const cleanedUpCellValue =
+        tempCellValue === "" ? `''` : `'${tempCellValue}'`;
       const cleanedUpErrorMessage =
         tempErrorMessage === "" ? `''` : `'${tempErrorMessage}'`;
+
       tempRow.push(
-        `{value: ${
-          tempCellValue === "" ? "''" : tempCellValue
-        }, editable: ${tempEditableBool}, errorText: ${cleanedUpErrorMessage}}`
+        `{value: ${cleanedUpCellValue}, editable: ${tempEditableBool}, errorText: ${cleanedUpErrorMessage}}`
       );
     }
     if (i === 0) {
