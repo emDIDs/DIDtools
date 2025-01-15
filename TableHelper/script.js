@@ -131,66 +131,22 @@ function download() {
   const numRows = document.getElementById("numRows").value;
   const numCols = document.getElementById("numCols").value;
 
-  // first, take care of column headers
-  const headers = document.querySelectorAll("th");
-  if (headers.length) {
-    // grab needed info from input boxes
-    const names = [];
-    const editableBooleansHeaders = [];
-    // const keys = [];
-    // const isRowHeader = [];
-
-    headers.forEach((header, index) => {
-      const tempHeaderCellValue = document.getElementById(
-        `row0Col${index}Input`
-      ).value;
-
-      // const inputString = header.children[0].value;
-      names.push(tempHeaderCellValue === "" ? "''" : tempHeaderCellValue);
-
-      const tempEditableBool = document.getElementById(
-        `row0Col${index}Editable`
-      ).checked;
-      editableBooleansHeaders.push(tempEditableBool);
-
-      // const uniqueKey = "header".concat(index, inputString.replace(/\s/g, ""));
-      // keys.push(uniqueKey);
-
-      // isRowHeader.push(index === 0 ? true : false);
-    });
-
-    // create string with info
-    const arrayOfHeaderObjects = [];
-    names.forEach((name, index) => {
-      // const cellString = `{ name: ${name}, key: ${keys[index]}, isRowHeader: ${isRowHeader[index]}}`;
-      const cellString = `{ name: ${name}, editable: ${editableBooleansHeaders[index]}}`;
-      arrayOfHeaderObjects.push(cellString);
-    });
-    const arrayString = arrayOfHeaderObjects.join();
-
-    const columnsString = `export const columns = [${arrayString}]`;
-    console.log("final columnsString:", columnsString);
-  }
-
-  // next, take care of regular rows to create rows
-  // note: cells does not contain header row cells
+  // Loop through all cells to grab info - this assumes first row is always a header row
 
   const arrayOfHeaderObjects = [];
   const arrayOfRowArrays = [];
 
-  const adjustedNumRows = numRows - 1;
-
-  for (let i = 0; i < adjustedNumRows; i++) {
+  for (let i = 0; i < numRows; i++) {
     const tempRow = [];
     for (let j = 0; j < numCols; j++) {
       const tempCellValue = document.getElementById(
-        `row${i + 1}Col${j}Input`
+        `row${i}Col${j}Input`
       ).value;
       const tempEditableBool = document.getElementById(
-        `row${i + 1}Col${j}Editable`
+        `row${i}Col${j}Editable`
       ).checked;
       const tempErrorMessage = document.getElementById(
-        `row${i + 1}Col${j}ErrorMessageInput`
+        `row${i}Col${j}ErrorMessageInput`
       ).value;
 
       const cleanedUpErrorMessage =
@@ -201,8 +157,17 @@ function download() {
         }, editable: ${tempEditableBool}, errorText: ${cleanedUpErrorMessage}}`
       );
     }
-    arrayOfRowArrays.push(`[${tempRow}]`);
+    if (i === 0) {
+      arrayOfHeaderObjects.push(tempRow);
+    } else {
+      arrayOfRowArrays.push(`[${tempRow}]`);
+    }
   }
+
+  const arrayString = arrayOfHeaderObjects.join();
+
+  const columnsString = `export const columns = [${arrayString}]`;
+  console.log("final columnsString:", columnsString);
 
   const rowString = `export const rows = [${arrayOfRowArrays}]`;
   console.log("rowString:", rowString);
