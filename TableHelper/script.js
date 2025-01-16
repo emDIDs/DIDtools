@@ -176,20 +176,20 @@ function download() {
   const arrayString = arrayOfHeaderObjects.join();
 
   const columnsString = `export const columns = [${arrayString}]`;
-  console.log("final columnsString:", columnsString);
 
   const rowString = `export const rows = [${arrayOfRowArrays}]`;
-  console.log("rowString:", rowString);
 
-  const downloadText = columnsString.concat(" ", rowString);
+  const downloadText = `${columnsString}
 
-  let filename = "GFG.txt";
+${rowString}`;
+
+  let filename = `${pascalAppletName}.tsx`;
 
   downloadFile(downloadText, filename);
 }
 function downloadFile(content, filename) {
   const element = document.createElement("a");
-  const file = new Blob([content], { type: "text/plain" });
+  const file = new Blob([content], { type: ".tsx" });
   element.href = URL.createObjectURL(file);
   element.download = filename;
   document.body.appendChild(element); // Required for Firefox
@@ -198,15 +198,19 @@ function downloadFile(content, filename) {
 }
 
 /**
+ * DESIRED FORMAT: 
+ * 
  * export const columns = [
-  { name: 'Diameter (centimeters)', editable: true },
+  { name: 'Diameter (centimeters)', editable: true, errorText: "" },
   {
     name: 'Distance Around the Circle (centimeters)',
-    editable: true
+    editable: true,
+    errorText: ""
   },
   {
     name: 'Value of the Ratio of the Distance Around the Circle to the Diameter',
-    editable: true
+    editable: true,
+    errorText: ""
   },
 ];
 
