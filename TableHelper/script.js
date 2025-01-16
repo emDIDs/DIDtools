@@ -180,6 +180,21 @@ function download() {
 
   const rowString = `export const rows = [${arrayOfRowArrays}]`;
   console.log("rowString:", rowString);
+
+  const downloadText = columnsString.concat(" ", rowString);
+
+  let filename = "GFG.txt";
+
+  downloadFile(downloadText, filename);
+}
+function downloadFile(content, filename) {
+  const element = document.createElement("a");
+  const file = new Blob([content], { type: "text/plain" });
+  element.href = URL.createObjectURL(file);
+  element.download = filename;
+  document.body.appendChild(element); // Required for Firefox
+  element.click();
+  document.body.removeChild(element);
 }
 
 /**
