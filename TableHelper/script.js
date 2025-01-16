@@ -137,7 +137,6 @@ function download() {
     .split(" ")
     .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
     .join("");
-  console.log("pascalAppletName", pascalAppletName);
 
   // Loop through all cells to grab info - this assumes first row is always a header row
 
@@ -163,7 +162,7 @@ function download() {
         tempErrorMessage === "" ? `''` : `'${tempErrorMessage}'`;
 
       tempRow.push(
-        `{value: ${cleanedUpCellValue}, editable: ${tempEditableBool}, errorText: ${cleanedUpErrorMessage}}`
+        `{value: ${cleanedUpCellValue}, editable: ${tempEditableBool}, errorText: ${cleanedUpErrorMessage}, invalid: false}`
       );
     }
     if (i === 0) {
@@ -201,16 +200,18 @@ function downloadFile(content, filename) {
  * DESIRED FORMAT: 
  * 
  * export const columns = [
-  { name: 'Diameter (centimeters)', editable: true, errorText: "" },
+  { name: 'Diameter (centimeters)', editable: true, errorText: "", invalid: false },
   {
     name: 'Distance Around the Circle (centimeters)',
     editable: true,
-    errorText: ""
+    errorText: "",
+    invalid: false
   },
   {
     name: 'Value of the Ratio of the Distance Around the Circle to the Diameter',
     editable: true,
-    errorText: ""
+    errorText: "",
+    invalid: false
   },
 ];
 
