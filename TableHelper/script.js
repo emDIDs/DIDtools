@@ -1,16 +1,3 @@
-// Things I want in my helper:
-/**
- *
- * 1. Num rows
- * 2. Num cols
- * 3. Column header checkbox - not right now
- * 4. Return .tsx file (pascal case name of applet + data.tsx)
- * 5. Add multiple inputs (or checkboxes) per input
- * 6. Eventually, add an option for two languages
- *
- *
- */
-
 function makeTable() {
   // delete old table if shown
   const myTable = document.getElementById("myTable");
@@ -23,7 +10,6 @@ function makeTable() {
   const numRows = document.getElementById("numRows").value;
   const numCols = document.getElementById("numCols").value;
   const downloadButton = document.getElementById("downloadButton");
-  // const hasColHeaders = document.getElementById("colHeaders").checked;
 
   downloadButton.removeAttribute("hidden");
 
