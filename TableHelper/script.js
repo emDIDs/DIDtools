@@ -168,7 +168,7 @@ function download() {
 
 ${rowString}`;
 
-  let filename = `${pascalAppletName}.tsx`;
+  let filename = `${pascalAppletName}Data.tsx`;
 
   downloadFile(downloadText, filename);
 }
