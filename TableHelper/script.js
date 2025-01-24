@@ -143,9 +143,9 @@ function download() {
       ).value;
 
       const cleanedUpCellValue =
-        tempCellValue === "" ? `''` : `'${tempCellValue}'`;
+        tempCellValue === "" ? `\`\`` : `\`${tempCellValue}\``;
       const cleanedUpErrorMessage =
-        tempErrorMessage === "" ? `''` : `'${tempErrorMessage}'`;
+        tempErrorMessage === "" ? `\`\`` : `\`${tempErrorMessage}\``;
 
       tempRow.push(
         `{value: ${cleanedUpCellValue}, editable: ${tempEditableBool}, errorText: ${cleanedUpErrorMessage}, invalid: false}`
