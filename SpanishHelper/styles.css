@@ -1,0 +1,68 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+}
+
+h1 {
+    color: #333;
+}
+
+textarea {
+    width: 100%;
+    height: 150px;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.input-container,
+.output-container {
+    position: relative;
+}
+
+.input-container {
+    width: 50%;
+    margin-bottom: 60px; 
+}
+
+.output-container {
+    width: 50%;
+    margin-top: 30px; 
+}
+
+#swapButton:hover {
+    background-color: #0056b3;
+}
+
+.button-wrapper {
+  position: absolute;
+  top: calc(100% + 10px);
+  right: 0;
+}
+
+#swapButton, #copyButton {
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+#copyButton:hover {
+    background-color: #218838;
+    display: none
+}
+
+
+pre {
+    background-color: #f8f8f8;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    overflow-x: auto;
+    white-space: pre-wrap;
+}
+
