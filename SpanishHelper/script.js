@@ -303,7 +303,7 @@ function replaceStrings(code) {
 
     // Check if all words are found in the code
     const allWordsFound = words.every((word) =>
-      new RegExp(`\\b${word}\\b`, "gi").test(code)
+    new RegExp(`(?:^|\\s|\\W)${word}(?=$|\\s|\\W)`, "gi").test(code)
     );
 
     if (allWordsFound) {
