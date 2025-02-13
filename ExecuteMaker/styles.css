@@ -1,0 +1,50 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 20px;
+}
+
+.container {
+  width: 80%;
+  margin: 0 auto;
+}
+
+textarea {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 20px;
+}
+
+.button-wrapper {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 20px;
+}
+
+button {
+  padding: 10px 20px; /* Make buttons bigger */
+  font-size: 16px; /* Increase font size */
+}
+
+pre {
+  background-color: #f0f0f0;
+  padding: 10px;
+  position: relative;
+  width: 100%;
+  overflow: auto;
+  white-space: pre-wrap; /* This makes the text wrap */
+  word-wrap: break-word; /* This ensures words break to avoid overflow */
+  height: auto;
+  max-height: 300px; /* Adjust the max height as needed */
+}
+
+h2 {
+  margin-top: 40px; /* Add margin to the top of h2 headings */
+}
+
+h2:first-of-type {
+  margin-top: 0; /* Remove extra margin from the first h2 heading */
+}
+
+#copy {
+  display: none; /* Hide the copy button initially */
+}
