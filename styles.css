@@ -91,7 +91,15 @@ header {
 }
 
 h3{
-  font-weight:lighter
+  font-weight:lighter;
+  color: var(--focused-gray);
+}
+
+h4{
+  font-weight:lighter;
+  color: var(--focused-gray);
+  font-size: 16px;
+  font-style: italic;
 }
 
 fieldset {

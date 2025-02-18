@@ -8,6 +8,23 @@ body {
   margin: 0;
 }
 
+.info-box {
+  padding: 12px;
+  font-size: 18px;
+  border-radius: 5px;
+  margin: 10px 0;
+  display: flex;
+  align-items: center;
+}
+
+code {
+  font-family: monospace;
+  background-color: #f4f4f4;
+  padding: 2px 4px;
+  border-radius: 4px;
+  color: #d63384;
+}
+
 .container {
   background-color: #fff;
   padding: 20px;
