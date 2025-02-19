@@ -160,13 +160,20 @@ function download() {
 
   const arrayString = arrayOfHeaderObjects.join();
 
-  const columnsString = `export const columns = [${arrayString}]`;
+  const columnsString = `export const columns: ColumnProps[] = [${arrayString}]`;
 
-  const rowString = `export const rows = [${arrayOfRowArrays}]`;
+  const rowString = `export const rows: CellProps[][] = [${arrayOfRowArrays}]`;
 
-  const downloadText = `${columnsString}
+  const downloadText = `import {
+  ColumnProps,
+  CellProps,
+} from '@/components/sharedUI/Table/TableComponent';
+  
+${columnsString}
 
-${rowString}`;
+${rowString}
+
+export const data = { rows, columns };`;
 
   let filename = `${pascalAppletName}Data.tsx`;
 
