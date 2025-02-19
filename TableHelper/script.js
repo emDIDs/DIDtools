@@ -1,11 +1,8 @@
 function makeTable() {
-  // delete old table if shown
-  const myTable = document.getElementById("myTable");
-  if (myTable.hasChildNodes()) {
-    while (myTable.hasChildNodes()) {
-      myTable.removeChild(myTable.firstChild);
-    }
-  }
+  // delete existing tables/checkboxes
+  deleteOldChildren("my-table")
+  deleteOldChildren("math-checkboxes")
+
 
   const numRows = document.getElementById("numRows").value;
   const numCols = document.getElementById("numCols").value;
@@ -13,9 +10,28 @@ function makeTable() {
 
   downloadButton.removeAttribute("hidden");
 
+  // create checkboxes for all math in a column
+  const checkboxDiv = document.getElementById("math-checkboxes");
+  for (let i = 0; i < numCols; i++) {
+    const checkboxName = `all-math-checkbox-${i}`
+    const tempCheckbox = document.createElement("label")
+    tempCheckbox.textContent = "Math Column? ";
+    tempCheckbox.setAttribute("for", checkboxName)
+    const tempInput=document.createElement("input")
+    tempInput.setAttribute("type", "checkbox")
+    tempInput.setAttribute("id", checkboxName)
+    tempInput.setAttribute("name", checkboxName)
+    tempCheckbox.appendChild(tempInput)
+    // tempCheckbox.style.display='inline-block'
+    checkboxDiv.appendChild(tempCheckbox)
+  }
+
+  checkboxDiv.removeAttribute("hidden");
+
+  // create table for inputs
   for (let r = 0; r < numRows; r++) {
     // Inserting a new row
-    const x = document.getElementById("myTable").insertRow(r);
+    const x = document.getElementById("my-table").insertRow(r);
     // Looping through columns
     for (let c = 0; c < numCols; c++) {
       // Inserting a new cell at index c in the current row
@@ -64,6 +80,7 @@ function makeTable() {
     el.appendChild(newDiv);
     newDiv.appendChild(newLabel);
   }
+
 
   const checkboxes = document.querySelectorAll('input[type="checkbox"]');
 
@@ -187,6 +204,15 @@ function downloadFile(content, filename) {
   document.body.appendChild(element); // Required for Firefox
   element.click();
   document.body.removeChild(element);
+}
+
+function deleteOldChildren(el) {
+  const myElement = document.getElementById(el);
+  if (myElement.hasChildNodes()) {
+    while (myElement.hasChildNodes()) {
+      myElement.removeChild(myElement.firstChild);
+    }
+  }
 }
 
 /**

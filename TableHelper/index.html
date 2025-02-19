@@ -1,44 +1,51 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <script src="script.js"></script>
-    <link rel="stylesheet" href="./styles.css" />
-    <title>Table Helper</title>
-    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/water.css@2/out/water.css"> -->
-  </head>
-  <body>
-    <h1>Table Helper</h1>
-    <div class="settings">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="script.js"></script>
+  <link rel="stylesheet" href="./styles.css" />
+  <title>Table Helper</title>
+  <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/water.css@2/out/water.css"> -->
+</head>
+
+<body>
+  <h1>Table Helper</h1>
+  <div class="settings">
     <label for="appletName">Applet Name</label>
-    <input class = "largeInput" id="appletName" name="appletName" size="50" placeholder="Enter Applet Title (e.g. Area Model)" />
+    <input class="largeInput" id="appletName" name="appletName" size="50"
+      placeholder="Enter Applet Title (e.g. Area Model)" />
 
     <label for="numRows">Number of rows</label>
-    <input class = "smallInput" type="number" id="numRows" name="numRows" />
+    <input class="smallInput" type="number" id="numRows" name="numRows" />
 
     <label for="numCols">Number of columns</label>
-    <input class = "smallInput" type="number" id="numCols" name="numCols" />
-    </div>
+    <input class="smallInput" type="number" id="numCols" name="numCols" />
+  </div>
 
-    <!-- commented out below because we are only allowing option to have column headers for now -->
-    <!-- <div>
+  <!-- commented out below because we are only allowing option to have column headers for now -->
+  <!-- <div>
       <label for="colHeaders">Column Headers:</label>
       <input type="checkbox" id="colHeaders" name="colHeaders" />
     </div> -->
 
-    <div>
+  <div>
     <button type="button" onclick="makeTable()">Make table</button>
-    </div>
+  </div>
 
-    <div>
-      <table id="myTable"> 
-        </table>
-    </div>
+  <div class="check-box-and-table">
+  <div id="math-checkboxes" hidden>
+  </div>
 
-    <div>
-      <button type="button" id = "downloadButton" onclick="download()" hidden>Download</button>
-      </div>
+    <table id="my-table">
+    </table>
+</div>
 
-  </body>
+  <div>
+    <button type="button" id="downloadButton" onclick="download()" hidden>Download</button>
+  </div>
+
+</body>
+
 </html>

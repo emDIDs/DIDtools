@@ -206,3 +206,18 @@ select {
     padding-left: 16px;
     padding-right: 16px;
 }
+
+/* #mathCheckboxes label {
+    display: inline-block; 
+    margin-right: 10px; 
+} */
+#math-checkboxes {
+    display: flex;
+    justify-content: space-evenly;
+    width: 100%;
+}
+
+#math-checkboxes label {
+    display: inline-block;
+    margin-right: 20px;  /* Optional: Adds space between checkboxes */
+}
