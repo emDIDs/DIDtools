@@ -147,14 +147,15 @@ label {
     align-items: center;
     margin-top: 10px;
 }
+
+.editable-checkbox-header, .editable-checkbox-row, .all-math {
+    margin-top: 3px; 
+}
+
 input {
     min-height: 32px;
     margin-top: 10px;
 }
-
-input[type="checkbox"] {
-    margin-top: 3px; 
-  }
 
 div.settings {
     display:grid;
@@ -211,13 +212,10 @@ select {
     display: flex;
     justify-content: space-evenly;
     width: 100%;
+    align-items: center;
 }
 
 #math-checkboxes label {
-    display: inline-block;
+    /* display: inline-block; */
     margin-right: 20px;  
-}
-
-.math-all {
-    margin-top:10px
 }

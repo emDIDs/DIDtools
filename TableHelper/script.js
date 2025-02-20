@@ -10,7 +10,7 @@ function makeTable() {
 
   downloadButton.removeAttribute("hidden");
 
-  // create checkboxes for all math in a column
+    // create checkboxes for all math in a column
   const checkboxDiv = document.getElementById("math-checkboxes");
   for (let i = 0; i < numCols; i++) {
     const checkboxName = `all-math-checkbox-${i}`
@@ -26,8 +26,7 @@ function makeTable() {
     checkboxDiv.appendChild(tempCheckbox)
   }
 
-
-  checkboxDiv.removeAttribute("hidden");
+    checkboxDiv.removeAttribute("hidden");
 
   // create table for inputs
   for (let r = 0; r < numRows; r++) {
@@ -60,6 +59,7 @@ function makeTable() {
       }
     }
   }
+
 
   function createEditableCheckbox(el, colNum, rowNum) {
     // create div
