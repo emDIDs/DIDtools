@@ -62,7 +62,6 @@ function makeTable() {
     }
   }
 
-
   function createEditableCheckbox(el, colNum, rowNum) {
     // create div
     const newDiv = document.createElement("div");
@@ -162,8 +161,11 @@ function download() {
         `row${i}Col${j}ErrorMessageInput`
       ).value;
 
+      // check to see if math all is checked for that column
+      const isMathCol = document.querySelector(`#all-math-checkbox-${j}`).checked 
+
       const cleanedUpCellValue =
-        tempCellValue === "" ? `\`\`` : `\`${tempCellValue}\``;
+        tempCellValue === "" ? `\`\`` : isMathCol && i!==0? `\`$$${tempCellValue}$$\`` : `\`${tempCellValue}\``;
       const cleanedUpErrorMessage =
         tempErrorMessage === "" ? `\`\`` : `\`${tempErrorMessage}\``;
 
