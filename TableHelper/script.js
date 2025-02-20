@@ -149,9 +149,9 @@ function download() {
       const tempEditableBool = document.getElementById(
         `row${i}Col${j}Editable`
       ).checked;
-      const tempErrorMessage = document.getElementById(
+      const tempErrorMessage = i !== 0 ?document.getElementById(
         `row${i}Col${j}ErrorMessageInput`
-      ).value;
+      ).value : ``;
 
       // check to see if math all is checked for that column
       const isMathCol = document.querySelector(`#all-math-checkbox-${j}`).checked 
@@ -162,7 +162,7 @@ function download() {
         tempErrorMessage === "" ? `\`\`` : `\`${tempErrorMessage}\``;
 
       tempRow.push(
-        `{value: ${cleanedUpCellValue}, editable: ${tempEditableBool}, errorText: ${cleanedUpErrorMessage}, invalid: false}`
+        i !== 0 ? `{value: ${cleanedUpCellValue}, editable: ${tempEditableBool}, errorText: ${cleanedUpErrorMessage}, invalid: false}` : `{value: ${cleanedUpCellValue}, editable: ${tempEditableBool}}`
       );
     }
     if (i === 0) {
@@ -190,7 +190,6 @@ ${rowString}
 export const data = { rows, columns };`;
 
   let filename = `${pascalAppletName}Data.tsx`;
-
   downloadFile(downloadText, filename);
 }
 function downloadFile(content, filename) {
