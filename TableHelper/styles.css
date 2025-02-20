@@ -153,7 +153,7 @@ input {
 }
 
 input[type="checkbox"] {
-    margin-top: 3px; /* Optional: slight vertical nudge for perfect alignment */
+    margin-top: 3px; 
   }
 
 div.settings {
@@ -207,10 +207,6 @@ select {
     padding-right: 16px;
 }
 
-/* #mathCheckboxes label {
-    display: inline-block; 
-    margin-right: 10px; 
-} */
 #math-checkboxes {
     display: flex;
     justify-content: space-evenly;
@@ -219,5 +215,9 @@ select {
 
 #math-checkboxes label {
     display: inline-block;
-    margin-right: 20px;  /* Optional: Adds space between checkboxes */
+    margin-right: 20px;  
+}
+
+.math-all {
+    margin-top:10px
 }

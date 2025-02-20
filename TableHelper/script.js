@@ -21,10 +21,12 @@ function makeTable() {
     tempInput.setAttribute("type", "checkbox")
     tempInput.setAttribute("id", checkboxName)
     tempInput.setAttribute("name", checkboxName)
+    tempInput.setAttribute("class", "all-math")
     tempCheckbox.appendChild(tempInput)
     // tempCheckbox.style.display='inline-block'
     checkboxDiv.appendChild(tempCheckbox)
   }
+
 
   checkboxDiv.removeAttribute("hidden");
 
@@ -60,6 +62,7 @@ function makeTable() {
     }
   }
 
+
   function createEditableCheckbox(el, colNum, rowNum) {
     // create div
     const newDiv = document.createElement("div");
@@ -69,6 +72,7 @@ function makeTable() {
     const tempID = `row${rowNum}Col${colNum}Editable`;
     newCheckbox.id = tempID;
     newCheckbox.setAttribute("type", "checkbox");
+    newCheckbox.setAttribute("class", "editable-checkbox");
 
     // create label
     const newLabel = document.createElement("label");
@@ -81,8 +85,7 @@ function makeTable() {
     newDiv.appendChild(newLabel);
   }
 
-
-  const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+  const checkboxes = document.querySelectorAll('input.editable-checkbox');
 
   checkboxes.forEach((checkbox) => {
     checkbox.addEventListener("change", function () {
