@@ -23,7 +23,6 @@ function makeTable() {
     tempInput.setAttribute("name", checkboxName)
     tempInput.setAttribute("class", "all-math")
     tempCheckbox.appendChild(tempInput)
-    // tempCheckbox.style.display='inline-block'
     checkboxDiv.appendChild(tempCheckbox)
   }
 
@@ -43,16 +42,16 @@ function makeTable() {
       // if (hasColHeaders && r === 0) {
       if (r === 0) {
         const colHeader = document.createElement("th");
-        colHeader.setAttribute("class", "tableHeader");
+        colHeader.setAttribute("class", "table-header");
         colHeader.setAttribute("id", `row${r}Col${c}`);
         const inputBox = document.createElement("input");
         inputBox.id = `row${r}Col${c}Input`;
         colHeader.appendChild(inputBox);
         createEditableCheckbox(colHeader, c, r);
-        createErrorMessageInput(colHeader, c, r);
         x.appendChild(colHeader);
       } else {
         const y = x.insertCell(c);
+        y.setAttribute("class", "table-cell");
         const inputBox = document.createElement("input");
         inputBox.id = `row${r}Col${c}Input`;
         y.appendChild(inputBox);
@@ -71,7 +70,7 @@ function makeTable() {
     const tempID = `row${rowNum}Col${colNum}Editable`;
     newCheckbox.id = tempID;
     newCheckbox.setAttribute("type", "checkbox");
-    newCheckbox.setAttribute("class", "editable-checkbox");
+    newCheckbox.setAttribute("class", rowNum === 0 ? "editable-checkbox-header" : "editable-checkbox-row");
 
     // create label
     const newLabel = document.createElement("label");
@@ -84,22 +83,15 @@ function makeTable() {
     newDiv.appendChild(newLabel);
   }
 
-  const checkboxes = document.querySelectorAll('input.editable-checkbox');
+  const checkboxes = document.querySelectorAll('input.editable-checkbox-row');
 
   checkboxes.forEach((checkbox) => {
     checkbox.addEventListener("change", function () {
       const targetDiv = document.getElementById(
         `${checkbox.id.concat("ErrorMessage")}`
       );
-      if (checkbox.checked) {
-        console.log(`Checkbox ${this.id} is checked`);
-        // Show error message string input box
-        targetDiv.style.visibility = "visible";
-      } else {
-        console.log(`Checkbox ${this.id} is unchecked`);
-        // Hide error message string input box
-        targetDiv.style.visibility = "hidden";
-      }
+
+      targetDiv.style.visibility = checkbox.checked ? "visible" : 'hidden'
     });
   });
 
