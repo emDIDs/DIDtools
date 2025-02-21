@@ -154,7 +154,7 @@ function download() {
       ).value : ``;
 
       // check to see if math all is checked for that column
-      const isMathCol = document.querySelector(`#all-math-checkbox-${j}`).checked 
+      const isMathCol = document.querySelector(`#all-math-checkbox-${j}`)?.checked 
 
       const cleanedUpCellValue =
         tempCellValue === "" ? `\`\`` : isMathCol && i!==0? `\`$$${tempCellValue}$$\`` : `\`${tempCellValue}\``;
@@ -189,8 +189,10 @@ ${rowString}
 
 export const data = { rows, columns };`;
 
+console.log("downloadText:", downloadText)
+
   let filename = `${pascalAppletName}Data.tsx`;
-  downloadFile(downloadText, filename);
+  // downloadFile(downloadText, filename);
 }
 function downloadFile(content, filename) {
   const element = document.createElement("a");
@@ -204,10 +206,8 @@ function downloadFile(content, filename) {
 
 function deleteOldChildren(el) {
   const myElement = document.getElementById(el);
-  if (myElement.hasChildNodes()) {
     while (myElement.hasChildNodes()) {
       myElement.removeChild(myElement.firstChild);
     }
-  }
 }
 
