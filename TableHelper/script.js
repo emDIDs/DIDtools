@@ -1,11 +1,8 @@
 function makeTable() {
-  // delete old table if shown
-  const myTable = document.getElementById("myTable");
-  if (myTable.hasChildNodes()) {
-    while (myTable.hasChildNodes()) {
-      myTable.removeChild(myTable.firstChild);
-    }
-  }
+  // delete existing tables/checkboxes
+  deleteOldChildren("my-table")
+  deleteOldChildren("math-checkboxes")
+
 
   const numRows = document.getElementById("numRows").value;
   const numCols = document.getElementById("numCols").value;
@@ -13,9 +10,28 @@ function makeTable() {
 
   downloadButton.removeAttribute("hidden");
 
+    // create checkboxes for all math in a column
+  const checkboxDiv = document.getElementById("math-checkboxes");
+  for (let i = 0; i < numCols; i++) {
+    const checkboxName = `all-math-checkbox-${i}`
+    const tempCheckbox = document.createElement("label")
+    tempCheckbox.textContent = "Math Column? ";
+    tempCheckbox.setAttribute("for", checkboxName)
+    const tempInput=document.createElement("input")
+    tempInput.setAttribute("type", "checkbox")
+    tempInput.setAttribute("id", checkboxName)
+    tempInput.setAttribute("name", checkboxName)
+    tempInput.setAttribute("class", "all-math")
+    tempCheckbox.appendChild(tempInput)
+    checkboxDiv.appendChild(tempCheckbox)
+  }
+
+    checkboxDiv.removeAttribute("hidden");
+
+  // create table for inputs
   for (let r = 0; r < numRows; r++) {
     // Inserting a new row
-    const x = document.getElementById("myTable").insertRow(r);
+    const x = document.getElementById("my-table").insertRow(r);
     // Looping through columns
     for (let c = 0; c < numCols; c++) {
       // Inserting a new cell at index c in the current row
@@ -25,16 +41,16 @@ function makeTable() {
       // if (hasColHeaders && r === 0) {
       if (r === 0) {
         const colHeader = document.createElement("th");
-        colHeader.setAttribute("class", "tableHeader");
+        colHeader.setAttribute("class", "table-header");
         colHeader.setAttribute("id", `row${r}Col${c}`);
         const inputBox = document.createElement("input");
         inputBox.id = `row${r}Col${c}Input`;
         colHeader.appendChild(inputBox);
         createEditableCheckbox(colHeader, c, r);
-        createErrorMessageInput(colHeader, c, r);
         x.appendChild(colHeader);
       } else {
         const y = x.insertCell(c);
+        y.setAttribute("class", "table-cell");
         const inputBox = document.createElement("input");
         inputBox.id = `row${r}Col${c}Input`;
         y.appendChild(inputBox);
@@ -43,6 +59,7 @@ function makeTable() {
       }
     }
   }
+
 
   function createEditableCheckbox(el, colNum, rowNum) {
     // create div
@@ -53,6 +70,7 @@ function makeTable() {
     const tempID = `row${rowNum}Col${colNum}Editable`;
     newCheckbox.id = tempID;
     newCheckbox.setAttribute("type", "checkbox");
+    newCheckbox.setAttribute("class", rowNum === 0 ? "editable-checkbox-header" : "editable-checkbox-row");
 
     // create label
     const newLabel = document.createElement("label");
@@ -65,22 +83,15 @@ function makeTable() {
     newDiv.appendChild(newLabel);
   }
 
-  const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+  const checkboxes = document.querySelectorAll('input.editable-checkbox-row');
 
   checkboxes.forEach((checkbox) => {
     checkbox.addEventListener("change", function () {
       const targetDiv = document.getElementById(
         `${checkbox.id.concat("ErrorMessage")}`
       );
-      if (checkbox.checked) {
-        console.log(`Checkbox ${this.id} is checked`);
-        // Show error message string input box
-        targetDiv.style.visibility = "visible";
-      } else {
-        console.log(`Checkbox ${this.id} is unchecked`);
-        // Hide error message string input box
-        targetDiv.style.visibility = "hidden";
-      }
+
+      targetDiv.style.visibility = checkbox.checked ? "visible" : 'hidden'
     });
   });
 
@@ -138,17 +149,20 @@ function download() {
       const tempEditableBool = document.getElementById(
         `row${i}Col${j}Editable`
       ).checked;
-      const tempErrorMessage = document.getElementById(
+      const tempErrorMessage = i !== 0 ?document.getElementById(
         `row${i}Col${j}ErrorMessageInput`
-      ).value;
+      ).value : ``;
+
+      // check to see if math all is checked for that column
+      const isMathCol = document.querySelector(`#all-math-checkbox-${j}`)?.checked 
 
       const cleanedUpCellValue =
-        tempCellValue === "" ? `\`\`` : `\`${tempCellValue}\``;
+        tempCellValue === "" ? `\`\`` : isMathCol && i!==0? `\`$$${tempCellValue}$$\`` : `\`${tempCellValue}\``;
       const cleanedUpErrorMessage =
         tempErrorMessage === "" ? `\`\`` : `\`${tempErrorMessage}\``;
 
       tempRow.push(
-        `{value: ${cleanedUpCellValue}, editable: ${tempEditableBool}, errorText: ${cleanedUpErrorMessage}, invalid: false}`
+        i !== 0 ? `{value: ${cleanedUpCellValue}, editable: ${tempEditableBool}, errorText: ${cleanedUpErrorMessage}, invalid: false}` : `{value: ${cleanedUpCellValue}, editable: ${tempEditableBool}}`
       );
     }
     if (i === 0) {
@@ -160,16 +174,22 @@ function download() {
 
   const arrayString = arrayOfHeaderObjects.join();
 
-  const columnsString = `export const columns = [${arrayString}]`;
+  const columnsString = `export const columns: ColumnProps[] = [${arrayString}]`;
 
-  const rowString = `export const rows = [${arrayOfRowArrays}]`;
+  const rowString = `export const rows: CellProps[][] = [${arrayOfRowArrays}]`;
 
-  const downloadText = `${columnsString}
+  const downloadText = `import {
+  ColumnProps,
+  CellProps,
+} from '@/components/sharedUI/Table/TableComponent';
+  
+${columnsString}
 
-${rowString}`;
+${rowString}
+
+export const data = { rows, columns };`;
 
   let filename = `${pascalAppletName}Data.tsx`;
-
   downloadFile(downloadText, filename);
 }
 function downloadFile(content, filename) {
@@ -182,45 +202,10 @@ function downloadFile(content, filename) {
   document.body.removeChild(element);
 }
 
-/**
- * DESIRED FORMAT: 
- * 
- * export const columns = [
-  { name: 'Diameter (centimeters)', editable: true, errorText: "", invalid: false },
-  {
-    name: 'Distance Around the Circle (centimeters)',
-    editable: true,
-    errorText: "",
-    invalid: false
-  },
-  {
-    name: 'Value of the Ratio of the Distance Around the Circle to the Diameter',
-    editable: true,
-    errorText: "",
-    invalid: false
-  },
-];
+function deleteOldChildren(el) {
+  const myElement = document.getElementById(el);
+    while (myElement.hasChildNodes()) {
+      myElement.removeChild(myElement.firstChild);
+    }
+}
 
-export const rows = [
-  [
-    {
-      value: '',
-      editable: true,
-      errorText: '',
-      invalid: false,
-    },
-    {
-      value: '',
-      editable: true,
-      errorText: '',
-      invalid: false,
-    },
-    {
-      value: '',
-      editable: false,
-      errorText: '',
-      invalid: false,
-    },
-  ],
-];
- */
