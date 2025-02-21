@@ -189,10 +189,8 @@ ${rowString}
 
 export const data = { rows, columns };`;
 
-console.log("downloadText:", downloadText)
-
   let filename = `${pascalAppletName}Data.tsx`;
-  // downloadFile(downloadText, filename);
+  downloadFile(downloadText, filename);
 }
 function downloadFile(content, filename) {
   const element = document.createElement("a");
