@@ -162,7 +162,7 @@ function download() {
         tempErrorMessage === "" ? `\`\`` : `\`${tempErrorMessage}\``;
 
       tempRow.push(
-        i !== 0 ? `{value: ${cleanedUpCellValue}, editable: ${tempEditableBool}, errorText: ${cleanedUpErrorMessage}, invalid: false, key: ${Date.now().toString()}}` : `{value: ${cleanedUpCellValue}, editable: ${tempEditableBool}}`
+        i !== 0 ? `{value: ${cleanedUpCellValue}, editable: ${tempEditableBool}, errorText: ${cleanedUpErrorMessage}, invalid: false, key: Date.now().toString()}` : `{value: ${cleanedUpCellValue}, editable: ${tempEditableBool}}`
       );
     }
     if (i === 0) {
