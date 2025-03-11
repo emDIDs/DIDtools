@@ -1,8 +1,10 @@
-const button1 = document.querySelector("#load");
-const button2 = document.querySelector("#compare");
+const button1 = document.getElementById("load");
+const button2 = document.getElementById("compare");
 const input = document.getElementById("material-id");
 const output = document.getElementById("results");
+const link = document.getElementById("download");
 let spanishDictionary = [];
+let notSpanishString = "";
 
 fetch(
   "https://raw.githubusercontent.com/words/an-array-of-spanish-words/refs/heads/master/index.json"
@@ -15,6 +17,7 @@ fetch(
 
 button1.addEventListener("click", () => {
   output.textContent = ``;
+  link.textContent = ``;
   const matID = input.value;
   const params = {
     // eslint-disable-next-line camelcase
@@ -172,18 +175,30 @@ function compareText() {
   );
 
   const cleanedComparison = squeakyClean.filter((word) => word !== "");
-  console.log(cleanedComparison);
+  const uniqueComparison = [...new Set(cleanedComparison)];
 
-  const notSpanish = cleanedComparison.filter(
-    (item) => !spanishDictionary.includes(item)
+  const notSpanish = uniqueComparison.filter(
+    (item) => !spanishDictionary.includes(item.toLowerCase())
   );
-
   const leftOverWords = notSpanish.length;
-  const totalWords = cleanedComparison.length;
+  const totalWords = uniqueComparison.length;
   const percentage = leftOverWords / totalWords;
   const roundedPercentage = Math.round(100 * percentage);
-  console.log(leftOverWords, totalWords, roundedPercentage);
   output.textContent = `${roundedPercentage.toString()}% of the words found are not in the Spanish dictionary.`;
+  link.textContent = `Click to Download Flagged Words`;
+  notSpanishString = notSpanish.join("\n");
 }
 
 button2.addEventListener("click", compareText);
+
+link.addEventListener("click", () => {
+  if (notSpanishString) {
+    const BOM = "\uFEFF";
+    const blob = new Blob([BOM + notSpanishString], {
+      type: "text/csv;charset=utf-8;",
+    });
+    const url = URL.createObjectURL(blob);
+    link.setAttribute("href", url);
+    link.download = "MissingText-".concat(input.value, ".csv");
+  }
+});
