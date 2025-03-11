@@ -14,6 +14,7 @@ fetch(
   .catch((err) => console.error(err));
 
 button1.addEventListener("click", () => {
+  output.textContent = ``;
   const matID = input.value;
   const params = {
     // eslint-disable-next-line camelcase
@@ -181,7 +182,7 @@ function compareText() {
   const totalWords = cleanedComparison.length;
   const percentage = leftOverWords / totalWords;
   const roundedPercentage = Math.round(100 * percentage);
-
+  console.log(leftOverWords, totalWords, roundedPercentage);
   output.textContent = `${roundedPercentage.toString()}% of the words found are not in the Spanish dictionary.`;
 }
 
