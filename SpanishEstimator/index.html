@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script defer src="script.js"></script>
+    <script src="deployggb.js"></script>
+    <link href="styles.css" rel="stylesheet" />
+    <title>Spanish Estimator</title>
+  </head>
+  <body>
+    <h1>Spanish Estimator</h1>
+    <h2>Determine Percentage of Words in English</h2>
+    <label>Material ID: <input id="material-id" /></label>
+    <div>
+      <button id="load">Load Applet</button>
+      <button id="compare">Compare</button>
+    </div>
+    <div class="columns">
+      <div id="ggb-element"></div>
+      <div class="results">
+        <h3>Results</h3>
+        <p id="results"></p>
+        <a id="download"></a>
+      </div>
+    </div>
+  </body>
+</html>
