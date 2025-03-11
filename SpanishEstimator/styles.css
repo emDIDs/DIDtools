@@ -191,3 +191,9 @@ select {
   padding-left: 16px;
   padding-right: 16px;
 }
+
+.columns {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+}

@@ -187,18 +187,16 @@ function compareText() {
   output.textContent = `${roundedPercentage.toString()}% of the words found are not in the Spanish dictionary.`;
   link.textContent = `Click to Download Flagged Words`;
   notSpanishString = notSpanish.join("\n");
+  const BOM = "\uFEFF";
+  const blob = new Blob([BOM + notSpanishString], {
+    type: "text/csv;charset=utf-8;",
+  });
+  const url = URL.createObjectURL(blob);
+  link.setAttribute("href", url);
 }
 
 button2.addEventListener("click", compareText);
 
 link.addEventListener("click", () => {
-  if (notSpanishString) {
-    const BOM = "\uFEFF";
-    const blob = new Blob([BOM + notSpanishString], {
-      type: "text/csv;charset=utf-8;",
-    });
-    const url = URL.createObjectURL(blob);
-    link.setAttribute("href", url);
-    link.download = "MissingText-".concat(input.value, ".csv");
-  }
+  link.download = "MissingText-".concat(input.value, ".csv");
 });
