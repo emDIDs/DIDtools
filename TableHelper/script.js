@@ -162,7 +162,7 @@ function download() {
         tempErrorMessage === "" ? `\`\`` : `\`${tempErrorMessage}\``;
 
       tempRow.push(
-        i !== 0 ? `{value: ${cleanedUpCellValue}, editable: ${tempEditableBool}, errorText: ${cleanedUpErrorMessage}, invalid: false}` : `{value: ${cleanedUpCellValue}, editable: ${tempEditableBool}}`
+        i !== 0 ? `{value: ${cleanedUpCellValue}, editable: ${tempEditableBool}, errorText: ${cleanedUpErrorMessage}, invalid: false, key: \`\${Date.now()}-\${Math.random().toString(36).substring(2, 9)}\`}` : `{value: ${cleanedUpCellValue}, key: \`\${Date.now()}-\${Math.random().toString(36).substring(2, 9)}\`, editable: ${tempEditableBool}, isRowHeader: true}`
       );
     }
     if (i === 0) {
@@ -174,20 +174,17 @@ function download() {
 
   const arrayString = arrayOfHeaderObjects.join();
 
-  const columnsString = `export const columns: ColumnProps[] = [${arrayString}]`;
+  const columnsString = `const columns = [${arrayString}]`;
 
-  const rowString = `export const rows: CellProps[][] = [${arrayOfRowArrays}]`;
+  const rowString = `const rows = [${arrayOfRowArrays}]`;
 
-  const downloadText = `import {
-  ColumnProps,
-  CellProps,
-} from '@/components/sharedUI/Table/TableComponent';
+  const downloadText = `import { DataProps } from '@/components/sharedUI/Table/TableComponent';
   
 ${columnsString}
 
 ${rowString}
 
-export const data = { rows, columns };`;
+export const data: DataProps = { rows, columns };`;
 
   let filename = `${pascalAppletName}Data.tsx`;
   downloadFile(downloadText, filename);
