@@ -19,8 +19,7 @@ function makeBranchName(title, ticketNum) {
   return `feat-digi-${ticketNum.replace("DIGI-", "")}-${hyphenTitle}`;
 }
 function makePRTitle(title, ticketNum) {
-  const hyphenTitle = hyphenate(title.toLowerCase());
-  return `feat: [DIGI-${ticketNum}] add ${title}`;
+  return `feat: [DIGI-${ticketNum}] add ${title.toLowerCase()}`;
 }
 function pascalCase(title) {
   return title
