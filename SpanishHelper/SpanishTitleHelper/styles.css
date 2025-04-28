@@ -1,0 +1,128 @@
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f4;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+}
+
+.info-box {
+  padding: 12px;
+  font-size: 18px;
+  border-radius: 5px;
+  margin: 10px 0;
+  display: flex;
+  align-items: center;
+}
+
+code {
+  font-family: monospace;
+  background-color: #f4f4f4;
+  padding: 2px 4px;
+  border-radius: 4px;
+  color: #d63384;
+}
+
+.container {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  width: 1200px;
+}
+
+.input-group {
+  margin-bottom: 15px;
+}
+
+.input-special {
+  display: inline-flex;
+  align-items: center;
+  width: 100%;
+}
+
+.input-special input {
+  flex: 1;
+  min-width: 0; /* Allows the input to shrink */
+}
+
+.input-special span {
+  margin-left: 2px; /* Space between input and text */
+  white-space: nowrap;
+}
+
+.output-container {
+  margin-top: 15px;
+  display: flex;
+  justify-content: center; /* Centers the output groups */
+  gap: 10px; /* Adds spacing between the output groups */
+}
+
+.output-group {
+  flex: 1; /* Allow the output groups to take equal space */
+  min-width: 0; /* Prevents the elements from growing too wide */
+  max-width: 32%; /* Ensures they stay small enough to fit on one line */
+}
+
+textarea {
+  width: 100%; /* Ensures the text area takes the full width of its parent */
+}
+
+label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+input[type="text"],
+textarea {
+  width: calc(100% - 10px);
+  padding: 8px;
+  margin-top: 5px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+textarea {
+  height: 60px;
+  resize: none;
+  background-color: #f9f9f9;
+}
+
+.copy-btn {
+  margin-top: 5px;
+  padding: 5px 10px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  width: 100%;
+}
+
+.copy-btn:hover {
+  background-color: #0056b3;
+}
+
+.button-group {
+  display: flex;
+  justify-content: space-between;
+}
+
+button {
+  padding: 8px 12px;
+  background-color: #28a745;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+button:hover {
+  background-color: #218838;
+}
