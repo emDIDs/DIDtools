@@ -12,15 +12,6 @@ document.getElementById("submitBtn").addEventListener("click", function () {
     spanishTitle,
     ticketNum
   );
-  // Update labels
-  document.querySelector('label[for="mdxField"]').textContent =
-    `Story/${pascalTitle}.mdx`;
-  document.querySelector('label[for="storyField"]').textContent =
-    `Story/${pascalTitle}.stories.tsx`;
-  document.querySelector('label[for="pascalField"]').textContent =
-    `${pascalTitle}.tsx`;
-  document.querySelector('label[for="specField"]').textContent =
-    `${pascalTitle}.spec.tsx`;
 });
 
 function makeBranchName(title, ticketNum) {
@@ -45,6 +36,23 @@ function getSpanishTitle(title) {
 
 function hyphenate(title) {
   return title.toLowerCase().replace(/\s/g, "-");
+}
+
+function copyToClipboard(elementId) {
+  const textarea = document.getElementById(elementId);
+  const copyButton = document.querySelector(
+    `button[onclick="copyToClipboard('${elementId}')"]`
+  );
+
+  navigator.clipboard.writeText(textarea.value);
+
+  // Change button text to "Copied!"
+  copyButton.textContent = "Copied!";
+
+  // Revert back to "Copy" after a moment
+  setTimeout(() => {
+    copyButton.textContent = "Copy";
+  }, 1000);
 }
 // document.getElementById("otherBtn").addEventListener("click", function () {
 //   const fields = [
