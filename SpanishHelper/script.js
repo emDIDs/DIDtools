@@ -3,9 +3,15 @@
 const replacements = [
   {
     english:
-    'Press k to " + (If(showKeyboardInstructions, "hide", "show")) + " keyboard instructions',
+      "Press space to open. Press up arrow\\\\and down arrow to go to different\\\\options. Press enter to select.",
     spanish:
-    'Presiona k para " + (If(showKeyboardInstructions, "ocultar", "mostrar")) + " las instrucciones de teclado',
+      "Presiona la barra de espacio para abrir.\\\\Presiona las teclas de flecha arriba y flecha abajo para dirigirte\\\\a diferentes opciones. Presiona la tecla intro para seleccionar.",
+  },
+  {
+    english:
+      'Press k to " + (If(showKeyboardInstructions, "hide", "show")) + " keyboard instructions',
+    spanish:
+      'Presiona k para " + (If(showKeyboardInstructions, "ocultar", "mostrar")) + " las instrucciones de teclado',
   },
   {
     english: "Press the arrow keys",
@@ -67,7 +73,7 @@ const replacements = [
     english: "to move this point",
     spanish: "para mover este punto",
   },
-    {
+  {
     english: "to change the height of the bar",
     spanish: "para cambiar la altura de la barra",
   },
@@ -119,7 +125,7 @@ const replacements = [
   {
     english: "Press space to reset the interactive",
     spanish:
-    "Presiona la barra de espacio para reiniciar la actividad interactiva",
+      "Presiona la barra de espacio para reiniciar la actividad interactiva",
   },
   {
     english: "Press space to check your work",
@@ -127,17 +133,19 @@ const replacements = [
   },
   {
     english: "Press space to check checkbox",
-    spanish: "Presiona la barra de espacio para marcar la casilla de verificación",
+    spanish:
+      "Presiona la barra de espacio para marcar la casilla de verificación",
   },
   {
     english: "Press space to uncheck checkbox",
-    spanish: "Presiona la barra de espacio para desmarcar la casilla de verificación",
+    spanish:
+      "Presiona la barra de espacio para desmarcar la casilla de verificación",
   },
   // If none of the above specific "Press space to" strings are present, use the generic starter:
   {
-  english: "Press space to",
-  spanish: "Presiona la barra de espacio para",
-},
+    english: "Press space to",
+    spanish: "Presiona la barra de espacio para",
+  },
   {
     english: "Input a value",
     spanish: "Ingresa un valor",
@@ -178,7 +186,7 @@ const replacements = [
     english: "Press space to open the instructions",
     spanish: "Presiona la barra de espacio para abrir las instrucciones",
   },
-  
+
   {
     english: "Press k to",
     spanish: "Press k to",
@@ -318,7 +326,7 @@ function replaceStrings(code) {
 
     // Check if all words are found in the code
     const allWordsFound = words.every((word) =>
-    new RegExp(`(?:^|\\s|\\W)${word}(?=$|\\s|\\W)`, "gi").test(code)
+      new RegExp(`(?:^|\\s|\\W)${word}(?=$|\\s|\\W)`, "gi").test(code)
     );
 
     if (allWordsFound) {
@@ -327,7 +335,9 @@ function replaceStrings(code) {
       const replacementRegex = new RegExp(sentencePattern, "gi");
 
       // Replace the entire sentence with the replacement sentence
-      code = code.replace(replacementRegex, replacement.spanish).replace(" - ", " ");
+      code = code
+        .replace(replacementRegex, replacement.spanish)
+        .replace(" - ", " ");
     }
   });
   return code;
@@ -356,10 +366,9 @@ function copyCode() {
   selection.addRange(range);
   document.execCommand("copy");
   autoDismissAlert("Code copied to clipboard!", 2000);
-   
 }
 function autoDismissAlert(message, duration) {
-  const alertBox = document.createElement('div');
+  const alertBox = document.createElement("div");
   alertBox.textContent = message;
   alertBox.style.cssText = `
     position: fixed;
