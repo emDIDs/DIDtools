@@ -56,14 +56,18 @@ const replacements = [
     spanish: "para dirigirte a diferentes opciones",
   },
   {
-    english: "Use + or –",
+    english: "Use + or - to move this point",
+    spanish: "Usa las teclas más o menos para mover este punto",
+  },
+  {
+    english: "Use + or -",
     spanish: "Usa las teclas más o menos",
   },
   {
     english: "to move this point",
     spanish: "para mover este punto",
   },
-  {
+    {
     english: "to change the height of the bar",
     spanish: "para cambiar la altura de la barra",
   },
@@ -79,10 +83,7 @@ const replacements = [
     english: "to move the number label",
     spanish: "para mover el rótulo del número",
   },
-    {
-    english: "Press space to",
-    spanish: "Presiona la barra de espacio para",
-  },
+
   {
     english: "Press space to open the instructions",
     spanish: "Presiona la barra de espacio para abrir las instrucciones",
@@ -111,19 +112,32 @@ const replacements = [
     english: "Press space to reset your work",
     spanish: "Presiona la barra de espacio para reiniciar tu trabajo",
   },
-    {
+  {
     english: "Press space to reset",
     spanish: "Presiona la barra de espacio para reiniciar",
   },
   {
     english: "Press space to reset the interactive",
     spanish:
-      "Presiona la barra de espacio para reiniciar la actividad interactiva",
+    "Presiona la barra de espacio para reiniciar la actividad interactiva",
   },
   {
     english: "Press space to check your work",
     spanish: "Presiona la barra de espacio para comprobar tu trabajo",
   },
+  {
+    english: "Press space to check checkbox",
+    spanish: "Presiona la barra de espacio para marcar la casilla de verificación",
+  },
+  {
+    english: "Press space to uncheck checkbox",
+    spanish: "Presiona la barra de espacio para desmarcar la casilla de verificación",
+  },
+  // If none of the above specific "Press space to" strings are present, use the generic starter:
+  {
+  english: "Press space to",
+  spanish: "Presiona la barra de espacio para",
+},
   {
     english: "Input a value",
     spanish: "Ingresa un valor",
@@ -156,14 +170,15 @@ const replacements = [
     english: "hide keyboard instructions",
     spanish: "mostrar las instrucciones de teclado",
   },
-  {
-    english: "Instructions",
-    spanish: "Instrucciones",
-  },
+  // {
+  //   english: "Instructions",
+  //   spanish: "Instrucciones",
+  // },
   {
     english: "Press space to open the instructions",
     spanish: "Presiona la barra de espacio para abrir las instrucciones",
   },
+  
   {
     english: "Press k to",
     spanish: "Press k to",
@@ -209,11 +224,11 @@ const replacements = [
     spanish: "Considera la expresión",
   },
   {
-    english: "Keyboard instructions on",
+    english: "Keyboard instructions enabled",
     spanish: "Las instrucciones de teclado están activadas",
   },
   {
-    english: "Keyboard instructions enabled",
+    english: "Keyboard instructions on",
     spanish: "Las instrucciones de teclado están activadas",
   },
   {
@@ -312,7 +327,7 @@ function replaceStrings(code) {
       const replacementRegex = new RegExp(sentencePattern, "gi");
 
       // Replace the entire sentence with the replacement sentence
-      code = code.replace(replacementRegex, replacement.spanish);
+      code = code.replace(replacementRegex, replacement.spanish).replace(" - ", " ");
     }
   });
   return code;
