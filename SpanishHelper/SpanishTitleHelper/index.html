@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Deprecated - Storybook Helper</title>
+    <link rel="stylesheet" href="styles.css" />
+    <script src="
+https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js
+"></script>
+  </head>
+  <body>
+    <div><h1 style = "color:#d63384">Spanish Storybook Title Helper</h1>
+    <div class="info-box">Use this to make your branch name for Spanish integration</div>
+    <br/>
+    <div class="container">
+      <div class="input-group">
+        <label for="ticketNum">Jira Ticket Number</label>
+        <input
+          type="text"
+          id="ticketNum"
+          placeholder="Enter Jira Ticket Number (e.g. 23456)"
+        />
+      </div>
+      <div class="input-group">
+        <label for="dbTitle">English Storybook Title</label>
+        <input
+        type="text"
+        id="dbTitle"
+        placeholder="Enter Database Title (e.g. Super Cool Applet Title)"
+        />
+      </div>
+      <div class="button-group">
+        <button id="submitBtn">Submit</button>
+      </div>
+            <div class="output-container">
+        <div class="output-group">
+          <label for="branchField">Branch Name</label>
+          <textarea id="branchField" readonly></textarea>
+          <button class="copy-btn" onclick="copyToClipboard('branchField')">
+            Copy
+          </button>
+        </div>
+        <div class="output-group">
+          <label for="pullRequestField">PR Title</label>
+          <textarea id="pullRequestField" readonly></textarea>
+          <button
+            class="copy-btn"
+            onclick="copyToClipboard('pullRequestField')"
+          >
+            Copy
+          </button>
+        </div>
+      </div>
+    </div>
+    <script src="utils.js"></script>
+    <script src="script.js"></script>
+  </body>
+</html>
