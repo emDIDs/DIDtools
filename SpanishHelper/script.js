@@ -5,7 +5,7 @@ const replacements = [
     english:
       "Press space to open. Press up arrow\\\\and down arrow to go to different\\\\options. Press enter to select.",
     spanish:
-      "Presiona la barra de espacio para abrir.\\\\Presiona las teclas de flecha arriba y flecha abajo para dirigirte\\\\a diferentes opciones. Presiona la tecla intro para seleccionar.",
+      "Presiona la barra de espacio para abrir.\\\\\\\\Presiona las teclas de flecha arriba y flecha abajo para dirigirte\\\\\\\\a diferentes opciones. Presiona la tecla intro para seleccionar",
   },
   {
     english:
