@@ -119,13 +119,13 @@ const replacements = [
     spanish: "Presiona la barra de espacio para reiniciar tu trabajo",
   },
   {
-    english: "Press space to reset",
-    spanish: "Presiona la barra de espacio para reiniciar",
-  },
-  {
     english: "Press space to reset the interactive",
     spanish:
-      "Presiona la barra de espacio para reiniciar la actividad interactiva",
+    "Presiona la barra de espacio para reiniciar la actividad interactiva",
+  },
+  {
+    english: "Press space to reset",
+    spanish: "Presiona la barra de espacio para reiniciar",
   },
   {
     english: "Press space to check your work",
