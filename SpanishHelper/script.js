@@ -119,6 +119,10 @@ const replacements = [
     spanish: "Presiona la barra de espacio para reiniciar tu trabajo",
   },
   {
+    english: "Use the reset button to reset the interactive",
+    spanish: "Presiona la barra de espacio para reiniciar la actividad interactiva",
+  },
+  {
     english: "Press space to reset the interactive",
     spanish:
     "Presiona la barra de espacio para reiniciar la actividad interactiva",
@@ -140,6 +144,11 @@ const replacements = [
     english: "Press space to uncheck checkbox",
     spanish:
       "Presiona la barra de espacio para desmarcar la casilla de verificación",
+  },
+  {
+    english: "Use the checkbox to show or hide",
+    spanish:
+      "Usa la casilla de verificación para mostrar u ocultar",
   },
   // If none of the above specific "Press space to" strings are present, use the generic starter:
   {
