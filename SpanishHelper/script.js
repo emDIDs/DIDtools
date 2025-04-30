@@ -1,11 +1,20 @@
 /* eslint-disable no-unused-vars */
 // Lists all English strings and their corresponding Spanish replacements
 const replacements = [
+  // If a sub-phrase is used multiple times, list large strings or whole sentences first, followed by smaller strings and sub-phrases
   {
     english:
       "Press space to open. Press up arrow\\\\and down arrow to go to different\\\\options. Press enter to select.",
     spanish:
       "Presiona la barra de espacio para abrir.\\\\\\\\Presiona las teclas de flecha arriba y flecha abajo para dirigirte\\\\\\\\a diferentes opciones. Presiona la tecla intro para seleccionar",
+  },
+    {
+    english: "Press space to open the instructions",
+    spanish: "Presiona la barra de espacio para abrir las instrucciones",
+  },
+  {
+    english: "Press space to open",
+    spanish: "Presiona la barra de espacio para abrir",
   },
   {
     english:
@@ -30,7 +39,7 @@ const replacements = [
     spanish: "Presiona las teclas de flecha arriba y flecha abajo",
   },
   {
-    english: "Press up and down arrowS",
+    english: "Press up and down arrows",
     spanish: "Presiona las teclas de flecha arriba y flecha abajo",
   },
   {
@@ -40,10 +49,6 @@ const replacements = [
   {
     english: "Press the up and down arrow keys",
     spanish: "Presiona las teclas de flecha arriba y flecha abajo",
-  },
-  {
-    english: "to move this point",
-    spanish: "para mover este punto",
   },
   {
     english: "to change the number of partitions",
@@ -88,15 +93,6 @@ const replacements = [
   {
     english: "to move the number label",
     spanish: "para mover el rótulo del número",
-  },
-
-  {
-    english: "Press space to open the instructions",
-    spanish: "Presiona la barra de espacio para abrir las instrucciones",
-  },
-  {
-    english: "Press space to open",
-    spanish: "Presiona la barra de espacio para abrir",
   },
   {
     english: "Press space to read the prompt again",
@@ -164,7 +160,6 @@ const replacements = [
     spanish:
       "Presiona la tecla de escape para salir de la actividad interactiva y regresar a la página",
   },
-
   {
     english: "Press enter to select",
     spanish: "Presiona la tecla intro para seleccionar",
@@ -177,19 +172,6 @@ const replacements = [
   {
     english: "hide keyboard instructions",
     spanish: "mostrar las instrucciones de teclado",
-  },
-  // {
-  //   english: "Instructions",
-  //   spanish: "Instrucciones",
-  // },
-  {
-    english: "Press space to open the instructions",
-    spanish: "Presiona la barra de espacio para abrir las instrucciones",
-  },
-
-  {
-    english: "Press k to",
-    spanish: "Press k to",
   },
   {
     english: "Press x to restart the tab cycle",
