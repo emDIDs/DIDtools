@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Interactive Viewer</title>
+    <link rel="stylesheet" href="../styles.css" />
+    <script src="https://www.geogebra.org/apps/deployggb.js"></script>
+    <script src="script.js" defer></script>
+    <style>
+      h1,
+      header {
+        margin: 8px;
+      }
+      main {
+        padding: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>Interactive Viewer</h1>
+    </header>
+    <main>
+      <div class="loader">
+        <p>Enter the interactive's material ID, then click Load Applet.</p>
+        <label for="id1">Applet ID: <input id="id1" type="text" /></label>
+        <button id="load">Load Applet</button>
+      </div>
+      <div id="ggb-container">
+        <div id="ggb-element"></div>
+      </div>
+    </main>
+
+    <p id="broken-click" class="hidden">Maybe coming soon?</p>
+    <script>
+      function clickFunction() {
+        document.querySelector("#broken-click").classList.remove("hidden");
+        setTimeout(() => {
+          document.querySelector("#broken-click").classList.add("hidden");
+          window.location.href = "https://www.youtube.com/watch?v=dQw4w9WgXcQ";
+        }, 2000);
+      }
+    </script>
+  </body>
+</html>
