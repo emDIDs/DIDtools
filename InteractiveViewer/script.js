@@ -13,6 +13,14 @@ button1.addEventListener("click", () => {
     enableShiftDragZoom: false,
     language: "en",
     id: "ggbApplet",
+    appletOnLoad: (ggbApplet) => {
+      ggbApplet.registerObjectUpdateListener("correct", () => {
+        const scoring = document.querySelector("#scoring");
+        if (scoring) {
+          scoring.textContent = `Correct: ${ggbApplet.getValue("correct")}`;
+        }
+      });
+    },
   };
   // eslint-disable-next-line no-undef
   const applet1 = new GGBApplet(params, true);
