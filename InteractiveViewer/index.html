@@ -15,6 +15,17 @@
       main {
         padding: 0;
       }
+      #prompt {
+        max-width: 590px;
+        word-wrap: break-word;
+      }
+      #prompt {
+        display: none;
+      }
+
+      #checkbox:checked ~ #prompt {
+        display: block;
+      }
     </style>
   </head>
   <body>
@@ -24,8 +35,15 @@
     <main>
       <div class="loader">
         <p>Enter the interactive's material ID, then click Load Applet.</p>
-        <label for="id1">Material ID: <input id="id1" type="text" /></label>
+        <label for="id1">Material ID: </label><input id="id1" type="text" />
         <button id="load">Load Applet</button>
+        <label for="checkbox">Show Prompt? </label>
+        <input
+          id="checkbox"
+          style="transform: translateY(10px)"
+          type="checkbox"
+        />
+        <p id="prompt"></p>
         <p id="scoring"></p>
       </div>
       <div id="ggb-container">
