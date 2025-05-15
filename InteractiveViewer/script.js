@@ -16,14 +16,14 @@ input1.addEventListener("change", () => {
 
 button1.addEventListener("click", () => {
   const params = {
-    material_id: matID,
+    material_id: matID.replace(/[^A-Za-z0-9]/g,""),
     enableRightClick: false,
     enableShiftDragZoom: false,
     language: "en",
     id: "ggbApplet",
     appletOnLoad: (ggbApplet) => {
       const prompt = document.querySelector("#prompt");
-      const promptText = ggbApplet.getValueString("prompt");
+      const promptText = ggbApplet.getValueString("prompt").concat(" ", ggbApplet.getValueString("promptText"));
       if (prompt && promptText !== "") {
         prompt.textContent = `Prompt: ${promptText}`;
       }
