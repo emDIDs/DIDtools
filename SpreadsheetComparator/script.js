@@ -32,14 +32,12 @@ compareBtn.addEventListener("click", async () => {
     appletData.map((row) => row.url.replaceAll('"', ""))
   );
 
-  console.log(didiURLs);
-  console.log(appletURLs);
-
   // Find additions
   const additions = appletData.filter(
     (row) => !didiURLs.has(row.url.replaceAll('"', ""))
   );
-  if (additions.length > 0) downloadCSV(additions, "additions.csv");
+  if (additions.length > 0)
+    downloadCSV(additions, "additions.csv", ["Interactive Name", "URL"]);
 
   // Find deletions
   const deletions = didiData
@@ -89,11 +87,12 @@ function readCSV(file) {
   });
 }
 
-function downloadCSV(rows, filename) {
-  const headers = Object.keys(rows[0]);
+function downloadCSV(rows, filename, newHeaders = []) {
+  const origHeaders = Object.keys(rows[0]);
+  const headers = newHeaders.length ? newHeaders : origHeaders;
   const csvContent = [
     headers.join(","),
-    ...rows.map((row) => headers.map((header) => row[header]).join(",")),
+    ...rows.map((row) => origHeaders.map((header) => row[header]).join(",")),
   ].join("\n");
   const blob = new Blob([csvContent], { type: "text/csv" });
   const link = document.createElement("a");
