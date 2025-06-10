@@ -1,6 +1,9 @@
 const button1 = document.querySelector("#load");
 const input1 = document.querySelector("#id1");
-let matID = "";
+const paramsString = window.location.search;
+const searchParams = new URLSearchParams(paramsString);
+searchParams.get("matId");
+let matID = searchParams.get("matId") || "";
 
 input1.addEventListener("change", () => {
   matID = input1.value;
@@ -14,16 +17,18 @@ input1.addEventListener("change", () => {
   }
 });
 
-button1.addEventListener("click", () => {
+const loadGeoGebra = () => {
   const params = {
-    material_id: matID.replace(/[^A-Za-z0-9]/g,""),
+    material_id: matID.replace(/[^A-Za-z0-9]/g, ""),
     enableRightClick: false,
     enableShiftDragZoom: false,
     language: "en",
     id: "ggbApplet",
     appletOnLoad: (ggbApplet) => {
       const prompt = document.querySelector("#prompt");
-      const promptText = ggbApplet.getValueString("prompt").concat(" ", ggbApplet.getValueString("promptText"));
+      const promptText = ggbApplet
+        .getValueString("prompt")
+        .concat(" ", ggbApplet.getValueString("promptText"));
       if (prompt && promptText !== "") {
         prompt.textContent = `Prompt: ${promptText}`;
       }
@@ -38,4 +43,11 @@ button1.addEventListener("click", () => {
   // eslint-disable-next-line no-undef
   const applet1 = new GGBApplet(params, true);
   applet1.inject("ggb-element");
+};
+
+window.addEventListener("load", () => {
+  input1.value = matID;
+  loadGeoGebra();
 });
+
+button1.addEventListener("click", loadGeoGebra);
