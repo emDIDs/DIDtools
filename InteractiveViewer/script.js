@@ -2,9 +2,9 @@ const button1 = document.querySelector("#load");
 const input1 = document.querySelector("#id1");
 const paramsString = window.location.search;
 const searchParams = new URLSearchParams(paramsString);
-searchParams.get("matId");
 let matID = searchParams.get("matId") || "";
-
+const language = searchParams.get("lang") || "en";
+console.log(matID, language);
 input1.addEventListener("change", () => {
   matID = input1.value;
   const prompt = document.querySelector("#prompt");
@@ -22,7 +22,7 @@ const loadGeoGebra = () => {
     material_id: matID.replace(/[^A-Za-z0-9]/g, ""),
     enableRightClick: false,
     enableShiftDragZoom: false,
-    language: "en",
+    language,
     id: "ggbApplet",
     appletOnLoad: (ggbApplet) => {
       const prompt = document.querySelector("#prompt");
