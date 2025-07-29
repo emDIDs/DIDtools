@@ -34,7 +34,12 @@ function cleanDescription(description) {
 }
 
 function generateBlock() {
-  const issueKey = document.getElementById("issueKey").value.trim();
+  const issueKey = document
+    .getElementById("issueKey")
+    .value.trim()
+    .includes("DIGI")
+    ? document.getElementById("issueKey").value.trim()
+    : "DIGI-".concat(document.getElementById("issueKey").value.trim());
   const jiraTitle = document.getElementById("jiraTitle").value.trim();
   const description = document.getElementById("description").value.trim();
   const type = document.getElementById("type").value;
