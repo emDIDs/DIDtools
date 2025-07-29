@@ -8,27 +8,39 @@
   </head>
   <body>
     <h1>MDX Generator</h1>
+    <label for="source">Source of Information</label>
+    <select id="source">
+      <option value="xml">XML</option>
+      <option value="csv">CSV</option>
+    </select>
     <main>
       <div class="column">
         <h2>Input</h2>
-        <label for="issueKey">Issue Key</label>
-        <input id="issueKey" type="text" />
+        <div id="csv-info" class="hidden">
+          <label for="issueKey">Issue Key</label>
+          <input id="issueKey" type="text" />
 
-        <label for="jiraTitle">Jira Title</label>
-        <input id="jiraTitle" type="text" />
+          <label for="jiraTitle">Jira Title</label>
+          <input id="jiraTitle" type="text" />
 
-        <label for="description">Description</label>
-        <textarea id="description" rows="6"></textarea>
+          <label for="description">Description</label>
+          <textarea id="description" rows="6"></textarea>
 
-        <label for="type">Block Type</label>
-        <select id="type">
-          <option value="parent">Parent</option>
-          <option value="variant">Variant</option>
-        </select>
+          <label for="type">Block Type</label>
+          <select id="type">
+            <option value="parent">Parent</option>
+            <option value="variant">Variant</option>
+          </select>
 
-        <label for="variantName">Variant Name (if block type is variant)</label>
-        <input id="variantName" type="text" />
-
+          <label for="variantName"
+            >Variant Name (if block type is variant)</label
+          >
+          <input id="variantName" type="text" />
+        </div>
+        <div id="xml-info">
+          <label for="xml-input">XML</label>
+          <textarea id="xml-input" type="text"></textarea>
+        </div>
         <button onclick="generateBlock()">Generate MDX and Copy</button>
       </div>
       <div id="wrapper" class="column">

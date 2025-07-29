@@ -1,3 +1,16 @@
+const sourceChoice = document.querySelector("#source");
+const csvInfo = document.querySelector("#csv-info");
+const xmlInfo = document.querySelector("#xml-info");
+sourceChoice.addEventListener("change", (event) => {
+  console.log(event);
+  if (sourceChoice.value === "csv") {
+    csvInfo.classList.remove("hidden");
+    xmlInfo.classList.add("hidden");
+  } else {
+    csvInfo.classList.add("hidden");
+    xmlInfo.classList.remove("hidden");
+  }
+});
 function getPascalName(name) {
   return name
     .replace(/-/g, " ")
