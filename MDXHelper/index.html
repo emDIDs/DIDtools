@@ -2,34 +2,39 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <title>MDX Block Generator</title>
+    <title>MDX Generator</title>
     <script defer src="./script.js"></script>
     <link rel="stylesheet" href="./styles.css" />
   </head>
   <body>
-    <h1>MDX Block Generator</h1>
+    <h1>MDX Generator</h1>
+    <main>
+      <div class="column">
+        <h2>Input</h2>
+        <label for="issueKey">Issue Key</label>
+        <input id="issueKey" type="text" />
 
-    <label for="issueKey">Issue Key</label>
-    <input id="issueKey" type="text" />
+        <label for="jiraTitle">Jira Title</label>
+        <input id="jiraTitle" type="text" />
 
-    <label for="jiraTitle">Jira Title</label>
-    <input id="jiraTitle" type="text" />
+        <label for="description">Description</label>
+        <textarea id="description" rows="6"></textarea>
 
-    <label for="description">Description</label>
-    <textarea id="description" rows="6"></textarea>
+        <label for="type">Block Type</label>
+        <select id="type">
+          <option value="parent">Parent</option>
+          <option value="variant">Variant</option>
+        </select>
 
-    <label for="type">Block Type</label>
-    <select id="type">
-      <option value="parent">Parent</option>
-      <option value="variant">Variant</option>
-    </select>
+        <label for="variantName">Variant Name (if block type is variant)</label>
+        <input id="variantName" type="text" />
 
-    <label for="variantName">Variant Slug (only for Variant type)</label>
-    <input id="variantName" type="text" />
-
-    <button onclick="generateBlock()">Generate MDX Block</button>
-
-    <h2>Copy This:</h2>
-    <pre id="output"></pre>
+        <button onclick="generateBlock()">Generate MDX and Copy</button>
+      </div>
+      <div id="wrapper" class="column">
+        <h2>Output</h2>
+        <pre id="output"></pre>
+      </div>
+    </main>
   </body>
 </html>
