@@ -7,16 +7,18 @@
     <link rel="stylesheet" href="./styles.css" />
   </head>
   <body>
-    <h1>MDX Generator</h1>
-    <label for="source">Source of Information</label>
-    <select id="source">
-      <option value="xml">XML</option>
-      <option value="csv">CSV</option>
-    </select>
+    <header>
+      <h1>MDX Generator</h1>
+      <label for="source">Source of Information</label>
+      <select id="source">
+        <option value="csv">Spreadsheet</option>
+        <option value="xml">XML</option>
+      </select>
+    </header>
     <main>
       <div class="column">
         <h2>Input</h2>
-        <div id="csv-info" class="hidden">
+        <div id="csv-info">
           <label for="issueKey">Issue Key</label>
           <input id="issueKey" type="text" />
 
@@ -25,23 +27,27 @@
 
           <label for="description">Description</label>
           <textarea id="description" rows="6"></textarea>
-
-          <label for="type">Block Type</label>
-          <select id="type">
-            <option value="parent">Parent</option>
-            <option value="variant">Variant</option>
-          </select>
-
-          <label for="variantName"
-            >Variant Name (if block type is variant)</label
-          >
-          <input id="variantName" type="text" />
         </div>
-        <div id="xml-info">
+        <div id="xml-info" class="hidden">
+          <h3>🚧 Work In Progress 🚧</h3>
+          <p>
+            <b>Use at your own risk.</b>
+          </p>
+          <p>
+            After pasting, check Storybook console to resolve hydration errors.
+          </p>
           <label for="xml-input">XML</label>
           <textarea id="xml-input" type="text"></textarea>
         </div>
-        <button onclick="generateBlock()">Generate MDX and Copy</button>
+        <label for="type">Block Type</label>
+        <select id="type">
+          <option value="parent">Parent</option>
+          <option value="variant">Variant</option>
+        </select>
+
+        <label for="variantName">Variant Name (if block type is variant)</label>
+        <input id="variantName" type="text" />
+        <button id="generate-copy">Generate MDX and Copy</button>
       </div>
       <div id="wrapper" class="column">
         <h2>Output</h2>

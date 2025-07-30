@@ -55,23 +55,17 @@ body {
   font-family: "CircularStd", sans-serif;
   font-size: 16px;
   background-color: rgb(247, 248, 249);
-  margin: auto;
   display: flex;
   flex-direction: column;
-  align-items: center;
-}
-#full-contents {
-  background-color: white;
-  max-width: 1240px;
-  padding: 10px;
 }
 
 header {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 3%;
+  margin-top: 0.5em;
 }
+
 fieldset {
   max-width: fit-content;
 }
@@ -79,35 +73,12 @@ textarea {
   min-width: 300px;
 }
 main {
-  margin: 3%;
+  margin: 0.5em 1.5em 1em;
   display: flex;
   flex-direction: row;
-  gap: 1em;
+  gap: 2em;
   align-items: flex-start;
   justify-content: flex-start;
-}
-
-table {
-  border-collapse: collapse;
-  border: 1px black solid;
-  margin: 10px;
-}
-
-th {
-  border: 1px black solid;
-  padding: 5px;
-  background: #f26a35;
-}
-
-td {
-  border: 1px black solid;
-  padding: 5px;
-}
-
-figure {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
 }
 
 button {
@@ -170,18 +141,6 @@ input {
   margin-top: 10px;
 }
 
-div.settings {
-  display: grid;
-  grid-template-columns: max-content max-content;
-  grid-gap: 5px;
-}
-div.settings label {
-  text-align: right;
-}
-div.settings label:after {
-  content: ":";
-}
-
 select {
   align-items: center;
   box-sizing: border-box;
@@ -206,31 +165,4 @@ select {
 
 .hidden {
   display: none;
-}
-
-.grouper {
-  margin-top: 20px;
-}
-
-#upload {
-  margin: 10px;
-  background-color: white;
-  font-family: "CircularStd", sans-serif;
-  font-size: 18px;
-  line-height: 1.5;
-  font-weight: 400;
-  padding-left: 16px;
-  padding-right: 16px;
-}
-
-#math-checkboxes {
-  display: flex;
-  justify-content: space-evenly;
-  width: 100%;
-  align-items: center;
-}
-
-#math-checkboxes label {
-  /* display: inline-block; */
-  margin-right: 20px;
 }
