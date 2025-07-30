@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Interactive Viewer</title>
+    <link rel="stylesheet" href="../styles.css" />
+    <script src="https://www.geogebra.org/apps/deployggb.js"></script>
+    <script src="script.js" defer></script>
+    <script>
+      (function (m, a, z, e) {
+        var s, t;
+        try {
+          t = m.sessionStorage.getItem("maze-us");
+        } catch (err) {}
+
+        if (!t) {
+          t = new Date().getTime();
+          try {
+            m.sessionStorage.setItem("maze-us", t);
+          } catch (err) {}
+        }
+
+        s = a.createElement("script");
+        s.src = z + "?apiKey=" + e;
+        s.async = true;
+        a.getElementsByTagName("head")[0].appendChild(s);
+        m.mazeUniversalSnippetApiKey = e;
+      })(
+        window,
+        document,
+        "https://snippet.maze.co/maze-universal-loader.js",
+        "17f05f8e-431c-4459-aabc-85f4fcf62c58"
+      );
+    </script>
+  </head>
+  <body>
+    <main>
+      <div id="ggb-element"></div>
+    </main>
+  </body>
+</html>

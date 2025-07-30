@@ -1,0 +1,168 @@
+@font-face {
+  font-family: "CircularStd";
+  src: local("./fonts/CircularStd-Black.otf") format("opentype");
+  font-weight: 900;
+}
+@font-face {
+  font-family: "CircularStd";
+  src: local("./fonts/CircularStd-BlackItalic.otf") format("opentype");
+  font-weight: 900;
+  font-style: italic;
+}
+@font-face {
+  font-family: "CircularStd";
+  src: local("./fonts/CircularStd-Bold.otf") format("opentype");
+  font-weight: 700;
+}
+@font-face {
+  font-family: "CircularStd";
+  src: local("./fonts/CircularStd-BoldItalic.otf") format("opentype");
+  font-weight: 700;
+  font-style: italic;
+}
+@font-face {
+  font-family: "CircularStd";
+  src: local("./fonts/CircularStd-Book.otf") format("opentype");
+  font-weight: 400;
+  font-style: normal;
+}
+@font-face {
+  font-family: "CircularStd";
+  src: local("./fonts/CircularStd-BookItalic.otf") format("opentype");
+  font-weight: 400;
+  font-style: italic;
+}
+@font-face {
+  font-family: "CircularStd";
+  src: local("./fonts/CircularStd-Medium.otf") format("opentype");
+  font-weight: 500;
+  font-style: normal;
+}
+@font-face {
+  font-family: "CircularStd";
+  src: local("./fonts/CircularStd-MediumItalic.otf") format("opentype");
+  font-weight: 500;
+  font-style: italic;
+}
+@font-face {
+  font-family: "Short Stack";
+  src: local("./fonts/ShortStack-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+}
+
+body {
+  font-family: "CircularStd", sans-serif;
+  font-size: 16px;
+  background-color: rgb(247, 248, 249);
+  display: flex;
+  flex-direction: column;
+}
+
+header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 0.5em;
+}
+
+fieldset {
+  max-width: fit-content;
+}
+textarea {
+  min-width: 300px;
+}
+main {
+  margin: 0.5em 1.5em 1em;
+  display: flex;
+  flex-direction: row;
+  gap: 2em;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+
+button {
+  margin: 10px;
+  color: white;
+  background: rgb(0, 11, 92);
+  font-family: "CircularStd", sans-serif;
+  font-size: 21px;
+  line-height: 1.5;
+  font-weight: 700;
+  padding-left: 16px;
+  padding-right: 16px;
+  border: white;
+}
+button:hover {
+  opacity: 0.65;
+}
+button:focus {
+  background-color: rgb(106, 115, 123);
+}
+.external-button {
+  margin: 10px;
+  background-color: white;
+  color: rgb(0, 11, 92);
+  font-family: "CircularStd", sans-serif;
+  font-size: 21px;
+  line-height: 1.5;
+  font-weight: 700;
+  padding-left: 16px;
+  padding-right: 16px;
+  border: rgb(0, 11, 92) 2px solid;
+}
+.external-button:focus {
+  background-color: rgb(106, 115, 123);
+  color: white;
+}
+.column {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+#wrapper {
+  flex: 2;
+}
+
+label {
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+}
+
+pre {
+  max-width: 1210px;
+  white-space: pre-wrap;
+}
+
+input {
+  min-height: 32px;
+  margin-top: 10px;
+}
+
+select {
+  align-items: center;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  padding: 8px;
+  margin-bottom: 8px;
+  visibility: visible;
+  font-family: CircularStd, sans-serif;
+  font-size: 21px;
+  font-weight: 400;
+  line-height: 31.5px;
+  color: rgb(41, 43, 44);
+  outline-color: rgb(41, 43, 44);
+  outline-offset: 0px;
+  outline-style: none;
+  outline-width: 0px;
+  column-gap: 4px;
+  overflow-wrap: break-word;
+  row-gap: 4px;
+}
+
+.hidden {
+  display: none;
+}
