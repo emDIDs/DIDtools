@@ -24,6 +24,7 @@ const loadGeoGebra = () => {
     enableShiftDragZoom: false,
     language,
     id: "ggbApplet",
+    showToolBarHelp: false,
     appletOnLoad: (ggbApplet) => {
       const prompt = document.querySelector("#prompt");
       const promptText = ggbApplet
@@ -51,3 +52,4 @@ window.addEventListener("load", () => {
 });
 
 button1.addEventListener("click", loadGeoGebra);
+
