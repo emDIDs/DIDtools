@@ -15,16 +15,27 @@
       main {
         padding: 0;
       }
+      form {
+        display: flex;
+        flex-direction: column;
+      }
+      .checkbox {
+        width: 30px;
+        transform: translateY(10px);
+      }
+      .modifier {
+        display: flex;
+        flex-direction: row;
+        gap: 20px;
+      }
       #prompt {
         max-width: 590px;
         word-wrap: break-word;
-      }
-      #prompt {
         display: none;
       }
-
-      #checkbox:checked ~ #prompt {
-        display: block;
+      #id1 {
+        width: 150px;
+        font-size: 18px;
       }
     </style>
   </head>
@@ -34,18 +45,32 @@
     </header>
     <main>
       <div class="loader">
-        <p>Enter the interactive's material ID, then click Load Applet.</p>
-        <p>Tip! Append the URL with the material ID or language code! (Ex: ?matId=kaqrqhdf or ?lang=es)</p>
+        <p>
+          Enter the interactive's material ID, then click Load Applet. Use the
+          checkboxes to modify the way you view the applet.
+        </p>
         <label for="id1">Material ID: </label><input id="id1" type="text" />
         <button id="load">Load Applet</button>
-        <label for="checkbox">Show Prompt? </label>
-        <input
-          id="checkbox"
-          style="transform: translateY(10px)"
-          type="checkbox"
-        />
-        <p id="prompt"></p>
-        <p id="scoring"></p>
+        <div class="modifier">
+          <form>
+            <div>
+              <input id="prompt-checkbox" type="checkbox" class="checkbox" />
+              <label for="prompt-checkbox">Show Prompt? </label>
+            </div>
+            <div>
+              <input id="debug-checkbox" type="checkbox" class="checkbox" />
+              <label for="debug-checkbox">Enable GeoGebra Debug? </label>
+            </div>
+            <div>
+              <input id="language-checkbox" type="checkbox" class="checkbox" />
+              <label for="language-checkbox">View in Spanish? </label>
+            </div>
+          </form>
+          <div id="results">
+            <p id="prompt"></p>
+            <p id="scoring"></p>
+          </div>
+        </div>
       </div>
       <div id="ggb-container">
         <div id="ggb-element"></div>
