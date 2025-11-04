@@ -1,12 +1,17 @@
 const button1 = document.querySelector("#load");
 const input1 = document.querySelector("#id1");
-const paramsString = window.location.search;
-const searchParams = new URLSearchParams(paramsString);
+const promptCheckbox = document.querySelector("#prompt-checkbox");
+const debugCheckbox = document.querySelector("#debug-checkbox");
+const languageCheckbox = document.querySelector("#language-checkbox");
+const prompt = document.querySelector("#prompt");
+const currentUrl = new URL(window.location.href);
+const { searchParams } = currentUrl;
 let matID = searchParams.get("matId") || "";
 const language = searchParams.get("lang") || "en";
-console.log(matID, language);
+
 input1.addEventListener("change", () => {
   matID = input1.value;
+  searchParams.set("matId", matID);
   const prompt = document.querySelector("#prompt");
   if (prompt) {
     prompt.textContent = "";
@@ -15,6 +20,33 @@ input1.addEventListener("change", () => {
   if (scoring) {
     scoring.textContent = "";
   }
+  history.pushState({}, "", currentUrl.toString());
+});
+
+promptCheckbox.addEventListener("change", ({ target }) => {
+  if (target.checked) {
+    prompt.style.display = "block";
+  } else {
+    prompt.style.display = "none";
+  }
+});
+
+debugCheckbox.addEventListener("change", ({ target }) => {
+  if (target.checked) {
+    searchParams.set("GeoGebraDebug", true);
+  } else {
+    searchParams.delete("GeoGebraDebug");
+  }
+  history.pushState({}, "", currentUrl.toString());
+});
+
+languageCheckbox.addEventListener("change", ({ target }) => {
+  if (target.checked) {
+    searchParams.set("lang", "es");
+  } else {
+    searchParams.delete("lang");
+  }
+  window.location.href = currentUrl.toString();
 });
 
 const loadGeoGebra = () => {
@@ -26,7 +58,6 @@ const loadGeoGebra = () => {
     id: "ggbApplet",
     showToolBarHelp: false,
     appletOnLoad: (ggbApplet) => {
-      const prompt = document.querySelector("#prompt");
       const promptText = ggbApplet
         .getValueString("prompt")
         .concat(" ", ggbApplet.getValueString("promptText"));
@@ -48,8 +79,21 @@ const loadGeoGebra = () => {
 
 window.addEventListener("load", () => {
   input1.value = matID;
-  loadGeoGebra();
+  const { searchParams } = currentUrl;
+  const language = searchParams.get("lang");
+  if (language === "es") {
+    languageCheckbox.checked = true;
+    document.documentElement.lang = "es";
+  } else {
+    document.documentElement.lang = "en";
+  }
+  const debug = searchParams.get("GeoGebraDebug");
+  if (debug === "true") {
+    debugCheckbox.checked = true;
+  }
+  if (matID !== "") {
+    loadGeoGebra();
+  }
 });
 
 button1.addEventListener("click", loadGeoGebra);
-
